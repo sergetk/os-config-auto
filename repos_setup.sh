@@ -4,7 +4,7 @@
 echo "About to clone emacs config"
 cd || exit ; 
 
-echo "$PWD"
+#echo "$PWD"
 
 if test -e ~/.emacs.d
 then
@@ -22,3 +22,12 @@ fi
 
 git clone git@github.com:sergetk/notes.git .notes
 echo "Finished cloning notes repo"
+
+echo "cloning kbdx repo"
+if test -e ~/kbdx
+then
+    rm -Rf ~/kbdx
+fi
+
+git clone git@github.com:sergetk/kbdx.git .notes
+echo "Finished cloning kbdx repo"

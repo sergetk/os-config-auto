@@ -8,7 +8,6 @@ if ! { test -e ~/.ssh/ && test -e ~/.ssh/id_rsa ; }
 then
     ssh-keygen -b 4096 -t rsa -N "" -f ~/.ssh/id_rsa
 
-
     PUBKEY=$(cat ~/.ssh/id_rsa.pub)
     ## echo $PUBKEY
 

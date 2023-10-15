@@ -10,3 +10,26 @@ Remaining
 
 4) create unit tests
 5) do ricing update.
+
+
+1)Install fresh version of manjaro
+2)Checkout the script repository
+3)create pass.txt file with password
+
+4)Run the main script
+4.1) Main script checks if state file is present
+4.1.1) If not present create state file with state
+4.1.1.1) Add the main script to the file so it allways run if update are not finished
+4.1.1.2) Run the token_decoder to generate the token
+5)Run Os update script
+  update the state when done
+6)Run the software install script
+  update the state when done
+  reboot
+
+7)run git_ssh_setup
+  update the state 
+8)emacs_setup
+  update the state
+9)repos_setup
+  update the state
