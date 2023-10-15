@@ -1,0 +1,12 @@
+
+Remaining
+1) get script to work on restart
+   - need to add bash file somewhere in the system so that it will automatically execute on session start.
+   
+   - need to create a file which will keep state of progress of scripts execution
+   - have case statement which will will execute specific script based on state read from progress_state.txt
+    
+3) create a git repo for scripts
+
+4) create unit tests
+5) do ricing update.
