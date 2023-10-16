@@ -21,10 +21,16 @@ cat pass.txt | sudo -S sh -c "yes | pacman -S zsh"
 
 #installing node version manager
 cat pass.txt | sudo -S sh -c "yes | pacman -S nvm"
-echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.zshrc
-echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
 
-source ~/.nvm/nvm.sh
+echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
+echo '[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"' >> ~/.zshrc
+
+echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
+echo '[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"' >> ~/.bashrc
+
+export NVM_DIR="$HOME/.nvm"
+source /usr/share/nvm/init-nvm.sh 
+
 nvm install node
 nvm use node
 nvm -v

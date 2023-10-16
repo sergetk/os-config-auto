@@ -1,6 +1,8 @@
 #!/bin/bash
 ##
 
+source ~/.nvm/nvm.sh
+
 #installing emacs
 cat pass.txt | sudo -S sh -c "yes | pacman -S emacs"
 (echo "# short-cut to start emacs " ; echo bindsym \$mod+Ctrl+Return exec --no-startup-id emacsclient -c ; echo "")>> $HOME/.i3/config
