@@ -18,8 +18,6 @@ sed -i 's/palemoon/brave/' ~/.i3/config
 
 #installing zsh
 cat pass.txt | sudo -S sh -c "yes | pacman -S zsh"
-cat pass.txt | sudo -S sh -c "yes | chsh -s $(which zsh)"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 #installing node version manager
 cat pass.txt | sudo -S sh -c "yes | pacman -S nvm"

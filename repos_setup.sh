@@ -31,3 +31,7 @@ fi
 
 git clone git@github.com:sergetk/kbdx.git 
 echo "Finished cloning kbdx repo"
+
+#zsh as main shell as it requires confirmation
+cat pass.txt | sudo -S sh -c "yes | chsh -s $(which zsh)"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
