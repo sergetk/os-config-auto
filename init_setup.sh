@@ -21,19 +21,19 @@ do
             sh "./os_setup.sh"
             printf 'software_setup' > state.txt ;;
         'software_setup')
-            sh -c "./software_setup.sh"
+            sh "./software_setup.sh"
             printf 'token_decode' > state.txt ;;
         'token_decode')
-            sh -c "./token_decoder.sh"
+            sh "./token_decoder.sh"
             printf 'git_ssh_setup' > state.txt ;;
         'git_ssh_setup')
-            sh -c "./git_ssh_setup.sh"
+            sh "./git_ssh_setup.sh"
             printf 'emacs_setup' > state.txt ;;
         'emacs_setup')
-            sh -c "./emacs_setup.sh"
+            sh "./emacs_setup.sh"
             printf 'repos_setup' > state.txt ;;
         'repos_setup')
-            sh -c "./repos_setup.sh"
+            sh "./repos_setup.sh"
             printf 'done' > state.txt ;;
     esac
     state=$(cat state.txt)

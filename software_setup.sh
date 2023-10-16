@@ -23,3 +23,10 @@ cat pass.txt | sudo -S sh -c "yes | pacman -S zsh"
 cat pass.txt | sudo -S sh -c "yes | pacman -S nvm"
 echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.zshrc
 echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
+
+source ~/.nvm/nvm.sh
+nvm install node
+nvm use node
+nvm -v
+npm -v
+node -v
