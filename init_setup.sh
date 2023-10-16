@@ -18,13 +18,13 @@ until [ "$state" == 'done' ]
 do
     case $state in
         'os_setup')
-            sh -c "./os_setup.sh"
+            sh "./os_setup.sh"
             printf 'software_setup' > state.txt ;;
         'software_setup')
             sh -c "./software_setup.sh"
             printf 'token_decode' > state.txt ;;
         'token_decode')
-            sh -c "./token_decode.sh"
+            sh -c "./token_decoder.sh"
             printf 'git_ssh_setup' > state.txt ;;
         'git_ssh_setup')
             sh -c "./git_ssh_setup.sh"

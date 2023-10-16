@@ -8,7 +8,7 @@
 ##
 
 # update manjaro
-cat pass.txt | sudo -S sh -c "yes | pacman -Syu"
+cat pass.txt | sudo -S sh -c "yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*"
 
 # fixes sound on fresh manjaro installation
 cat pass.txt | sudo -S sh -c "yes | pacman -S pulseaudio-alsa"
@@ -17,11 +17,11 @@ cat pass.txt | sudo -S sh -c "yes | pacman -S pulseaudio-alsa"
 cat pass.txt | sudo -S sh -c "yes | pacman -S geoclue2"
 
 #enable user service for redshift
-systemctl start geoclue
+cat pass.txt | sudo -S sh -c "systemctl start geoclue"
 
 #install red-shift 
 cat pass.txt | sudo -S sh -c "yes | pacman -S redshift"
-systemctl --user enable redshift.service
+cat pass.txt | sudo -S sh -c " systemctl --user enable redshift.service"
 
 #adding it to i3 config so it would start on startup and creating configuration file 
 (echo "# geoclue needed for reshift to get location " ; echo exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent ; echo "")>> $HOME/.i3/config

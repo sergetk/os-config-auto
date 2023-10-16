@@ -29,5 +29,5 @@ then
     rm -Rf ~/kbdx
 fi
 
-git clone git@github.com:sergetk/kbdx.git .notes
+git clone git@github.com:sergetk/kbdx.git 
 echo "Finished cloning kbdx repo"
