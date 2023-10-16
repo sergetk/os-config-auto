@@ -6,22 +6,30 @@
 #: Options 	: none
 #
 
-cat pass.txt | sudo -S sh -c "yes | pacman -S feh"
-cat pass.txt | sudo -S sh -c "yes | pacman -S keepass"
+source functions_util.sh
+
+y_install feh
+y_install keepass 
+
 sed -i 's/bottom/top/g' ~/.i3/config 
 
 #installing brave browser
-#sudo sed -Ei '/EnableAUR/s/^#//' /etc/pamac.conf
-cat pass.txt | sudo -S sh -c "sed -Ei 'EnableAUR/s/^#//' /etc/pamac.conf"
-cat pass.txt | sudo -S sh -c "yes | pacman -S brave-browser"
+#cat pass.txt | sudo -S sh -c "sed -Ei 'EnableAUR/s/^#//' /etc/pamac.conf"
+sudo_cmd "sed -Ei 'EnableAUR/s/^#//' /etc/pamac.conf"
+
+
+y_install brave-browser
 sed -i 's/palemoon/brave/' ~/.i3/config
 
 #installing zsh
-cat pass.txt | sudo -S sh -c "yes | pacman -S zsh"
+#cat pass.txt | sudo -S sh -c "yes | pacman -S zsh"
+y_install zsh
 
 #installing node version manager
-cat pass.txt | sudo -S sh -c "yes | pacman -S nvm"
+#cat pass.txt | sudo -S sh -c "yes | pacman -S nvm"
+y_install zsh
 
+nvmdir =
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
 echo '[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"' >> ~/.zshrc
 
@@ -33,6 +41,3 @@ source /usr/share/nvm/init-nvm.sh
 
 nvm install node
 nvm use node
-nvm -v
-npm -v
-node -v
