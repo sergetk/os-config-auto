@@ -19,21 +19,18 @@ do
     case $state in
         'os_setup')
             sh "./os_setup.sh"
-            printf 'software_setup' > state.txt ;;
-        'software_setup')
-            sh "./software_setup.sh"
-            printf 'token_decode' > state.txt ;;
-        'token_decode')
-            sh "./token_decoder.sh"
             printf 'git_ssh_setup' > state.txt ;;
         'git_ssh_setup')
             sh "./git_ssh_setup.sh"
-            printf 'emacs_setup' > state.txt ;;
-        'emacs_setup')
-            sh "./emacs_setup.sh"
             printf 'repos_setup' > state.txt ;;
         'repos_setup')
             sh "./repos_setup.sh"
+            printf 'software_setup' > state.txt ;;
+        'software_setup')
+            sh "./software_setup.sh"
+            printf 'emacs_setup' > state.txt ;;
+        'emacs_setup')
+            sh "./emacs_setup.sh"
             printf 'done' > state.txt ;;
     esac
     state=$(cat state.txt)

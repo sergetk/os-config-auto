@@ -11,3 +11,7 @@ cat pass.txt | sudo -S sh -c "yes | pacman -S emacs"
 
 npm install -g bash-language-server
 cat pass.txt | sudo -S sh -c "yes | pacman -S shellcheck"
+
+#zsh as main shell as it requires confirmation
+cat pass.txt | sudo -S sh -c "yes | chsh -s $(which zsh)"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
