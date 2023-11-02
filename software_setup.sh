@@ -6,13 +6,12 @@
 #: Options 	: none
 #
 
-write_nvm_to_shell()
-
 cat pass.txt | sudo -S sh -c "yes | pacman -S feh"
 cat pass.txt | sudo -S sh -c "yes | pacman -S keepass"
 sed -i 's/bottom/top/g' ~/.i3/config 
 
 #installing brave browser
+#sudo sed -Ei '/EnableAUR/s/^#//' /etc/pamac.conf
 cat pass.txt | sudo -S sh -c "sed -Ei 'EnableAUR/s/^#//' /etc/pamac.conf"
 cat pass.txt | sudo -S sh -c "yes | pacman -S brave-browser"
 sed -i 's/palemoon/brave/' ~/.i3/config
