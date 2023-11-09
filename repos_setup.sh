@@ -38,4 +38,8 @@ then
 fi
 
 git clone https://aur/archlinux.org/nordvpn-bin.git
+# cd nordvpn-bin
+# sudo pacman -U nordvpn-bin-*.*
+# sudo systemctl enable --now nordvpnd
+
 echo "Finished cloning nord-vpn"
