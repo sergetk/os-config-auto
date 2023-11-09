@@ -38,3 +38,7 @@ nvm alias default node
 nvm -v
 npm -v
 node -v
+
+cat pass.txt | sudo -S sh -c "yes | pacman -S dart"
+
+echo 'export PATH="$PATH:/usr/lib/dart/bin"' >> ~/.profile
