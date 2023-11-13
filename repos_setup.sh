@@ -4,8 +4,6 @@
 echo "About to clone emacs config"
 cd || exit ; 
 
-#echo "$PWD"
-
 if test -e ~/.emacs.d
 then
     rm -Rf ~/.emacs.d
@@ -32,6 +30,16 @@ fi
 git clone git@github.com:sergetk/kbdx.git 
 echo "Finished cloning kbdx repo"
 
-#zsh as main shell as it requires confirmation
-cat pass.txt | sudo -S sh -c "yes | chsh -s $(which zsh)"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+echo "cloning nordvpn"
+if test -e ~/nordvpn-bin
+then
+    rm -Rf ~/nordvpn-bin
+fi
+
+git clone https://aur/archlinux.org/nordvpn-bin.git
+# cd nordvpn-bin
+# sudo pacman -U nordvpn-bin-*.*
+# sudo systemctl enable --now nordvpnd
+
+echo "Finished cloning nord-vpn"
