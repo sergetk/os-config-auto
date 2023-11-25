@@ -37,7 +37,7 @@ then
     rm -Rf ~/nordvpn-bin
 fi
 
-git clone https://aur/archlinux.org/nordvpn-bin.git
+git clone https://aur.archlinux.org/nordvpn-bin.git
 # cd nordvpn-bin
 # sudo pacman -U nordvpn-bin-*.*
 # sudo systemctl enable --now nordvpnd

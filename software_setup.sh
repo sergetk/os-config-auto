@@ -27,9 +27,9 @@ y_install zsh
 
 #installing node version manager
 #cat pass.txt | sudo -S sh -c "yes | pacman -S nvm"
-y_install zsh
+y_install nvm 
 
-nvmdir =
+#nvmdir =
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
 echo '[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"' >> ~/.zshrc
 
