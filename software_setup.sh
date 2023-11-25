@@ -6,7 +6,7 @@
 #: Options 	: none
 #
 
-source functions_util.sh
+source ~/os-config-auto/functions_util.sh
 
 y_install feh
 y_install keepass 
