@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#read the state file
-#if doesn't exist create new with initial state and assign it to state variable
+# read the state file
+# if doesn't exist create new with initial state and assign it to state variable
 # open until loop which uses state variable as flag
 # use case for each state
 
@@ -31,6 +31,9 @@ do
             printf 'emacs_setup' > state.txt ;;
         'emacs_setup')
             sh "./emacs_setup.sh"
+            printf 'clean_up' > state.txt ;;
+        'clean_up')
+            sh "./clean_up.sh"
             printf 'done' > state.txt ;;
     esac
     state=$(cat state.txt)

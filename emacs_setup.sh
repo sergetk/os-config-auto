@@ -1,17 +1,22 @@
 #!/bin/bash
 ##
-
-source ~/.nvm/nvm.sh
+# shellcheck source=/dev/null
+source "$HOME/.nvm/nvm.sh"
+source "functions_util.sh"
 
 #installing emacs
-cat pass.txt | sudo -S sh -c "yes | pacman -S emacs"
-(echo "# short-cut to start emacs " ; echo "bindsym \$mod+Ctrl+Return exec --no-startup-id emacsclient -c" ; echo "")>> $HOME/.i3/config
-(echo "# short-cut to start emacs " ; echo "bindsym \$mod+Ctrl+Escape exec --no-startup-id emacsclient -e '(kill-emacs)'" ; echo "")>> $HOME/.i3/config
-(echo "# start emacs as daemon " ; echo exec_always --no-startup-id emacs --daemon ; echo "")>> $HOME/.i3/config
+y_install emacs
+
+#append shortcuts and daemon starup command to i3/config
+append_to_i3 "# short-cut to start emacsclient " "bindsym \$mod+Ctrl+Return exec --no-startup-id emacsclient -c"
+append_to_i3 "# short-cut to end emacsclient " "bindsym \$mod+Ctrl+Escape exec --no-startup-id emacsclient -e '(kill-emacs)'"
+append_to_i3 "# start emacs as daemon " "exec_always --no-startup-id emacs --daemon "
 
 npm install -g bash-language-server
-cat pass.txt | sudo -S sh -c "yes | pacman -S shellcheck"
+y_install shellcheck
 
 #zsh as main shell as it requires confirmation
-cat pass.txt | sudo -S sh -c "yes | chsh -s $(which zsh)"
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo_cmd "yes | chsh -s $(which zsh)"
+
+curl -fsSL -o install_ohmyzsh.sh https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+sh install_ohmyzsh.sh --unattended

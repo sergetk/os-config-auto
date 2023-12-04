@@ -7,26 +7,28 @@
 #: Options      : none
 ##
 
+source "functions_util.sh"
+
 # update manjaro
-cat pass.txt | sudo -S sh -c "yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*"
+sudo_cmd "yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*"
 
 # fixes sound on fresh manjaro installation
-cat pass.txt | sudo -S sh -c "yes | pacman -S pulseaudio-alsa"
+y_install pulseaudio-alsa 
 
 #install geoclue required for red-shift
-cat pass.txt | sudo -S sh -c "yes | pacman -S geoclue2"
+y_install geoclue2
 
 #enable user service for redshift
-cat pass.txt | sudo -S sh -c "systemctl start geoclue"
+sudo_cmd "systemctl start geoclue"
 
 #install red-shift 
-cat pass.txt | sudo -S sh -c "yes | pacman -S redshift"
-cat pass.txt | sudo -S sh -c " systemctl --user enable redshift.service"
+y_install redshift
+sudo_cmd "systemctl --user enable redshift.service"
 
 #adding it to i3 config so it would start on startup and creating configuration file 
-(echo "# geoclue needed for reshift to get location " ; echo exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent ; echo "")>> $HOME/.i3/config
-(echo "# redshift-gtk startup" ; echo exec --no-startup-id redshift-gtk ; echo "")>> $HOME/.i3/config
+append_to_i3 "# geoclue needed for reshift to get location " "exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent" 
+append_to_i3 "# redshift-gtk startup" "echo exec --no-startup-id redshift-gtk"
 
 #installing ntp for accurate date
-cat pass.txt | sudo -S sh -c "yes | pacman -S ntp"
-cat pass.txt | sudo -S sh -c "timedatectl set-ntp true"
+y_install ntp
+sudo_cmd "timedatectl set-ntp true"
