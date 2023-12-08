@@ -1,5 +1,5 @@
 #!/bin/bash
-#: Titile  : functions_util.sh 
+#: Titile  : functions_util.sh
 #: Author  : stk
 #: Description : collection of reusable functions 
 #: Version : 0.1
@@ -7,7 +7,8 @@
 
 sudo_cmd() #@ USAGE: sudocmd $2 -sudo password file (default pass.txt); $1 - command to run; 
 {
-  (cat "${2:-pass.txt}") | sudo -S sh -c "$1" 
+  pass=${2:-pass.txt}
+  (cat "$pass") | sudo -S sh -c "$1" 
 }
 
 ## function which installs software package with root previledges

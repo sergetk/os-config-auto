@@ -7,7 +7,7 @@
 #: Options      : none
 ##
 
-source "functions_util.sh"
+source "./functions_util.sh"
 
 # update manjaro
 sudo_cmd "yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*"
@@ -27,7 +27,7 @@ sudo_cmd "systemctl --user enable redshift.service"
 
 #adding it to i3 config so it would start on startup and creating configuration file 
 append_to_i3 "# geoclue needed for reshift to get location " "exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent" 
-append_to_i3 "# redshift-gtk startup" "echo exec --no-startup-id redshift-gtk"
+append_to_i3 "# redshift-gtk startup" "exec --no-startup-id redshift-gtk"
 
 #installing ntp for accurate date
 y_install ntp

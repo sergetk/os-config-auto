@@ -5,7 +5,7 @@
 #: Version 	: 0.1
 #: Options 	: none
 #
-source "functions_util.sh"
+source "./functions_util.sh"
 
 append_nvm_to_shellrc() #@ append nvm path to shell rc file: $1 shell rc file path
 {

@@ -1,7 +1,7 @@
 #!/bin/bash
 ## file for debuggig specific part of the script
 
-source "functions_util.sh"
+source "./functions_util.sh"
 
 #curl -fsSL -o install_ohmyzsh.sh https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 #sh install_ohmyzsh.sh --unattended
