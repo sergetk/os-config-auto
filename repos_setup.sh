@@ -4,7 +4,7 @@
 source "./functions_util.sh"
 cd || exit ; 
 
-gclone_p .emacs.d 
+gclone_p emacs.d .emacs.d
 gclone_p notes .notes
 gclone_p kbdx
 gclone https://aur.archlinux.org/nordvpn-bin.git
