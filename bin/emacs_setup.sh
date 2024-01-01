@@ -2,7 +2,7 @@
 ##
 # shellcheck source=/dev/null
 source "$HOME/.nvm/nvm.sh"
-source "./functions_util.sh"
+source "../lib/functions_util.sh"
 
 #installing emacs
 y_install emacs

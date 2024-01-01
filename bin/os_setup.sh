@@ -7,7 +7,7 @@
 #: Options      : none
 ##
 
-source "./functions_util.sh"
+source "../lib/functions_util.sh"
 
 # update manjaro
 sudo_cmd "yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*"

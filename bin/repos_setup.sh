@@ -1,7 +1,7 @@
 #!/bin/bash
 ##: Description    : Script used to clone all my repositories.
 
-source "./functions_util.sh"
+source "../lib/functions_util.sh"
 cd || exit ; 
 
 gclone_p emacs.d .emacs.d

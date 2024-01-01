@@ -28,3 +28,15 @@ then
 
     echo "Added SSH key to the ssh-agent"
 fi
+
+email_location="$(dirname "$PWD")/email.txt"
+
+if test -e "$email_location"
+then
+    email=$(cat "$email_location")
+    printf "email = %s, user = %s\n" "$email" "$USER"
+    git config --global user.name "$USER"
+    git config --global user.email "$email" 
+else
+    printf "no email loation specified"
+fi 

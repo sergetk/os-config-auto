@@ -5,7 +5,7 @@
 #: Version 	: 0.1
 #: Options 	: none
 #
-source "./functions_util.sh"
+source "../lib/functions_util.sh"
 
 append_nvm_to_shellrc() #@ append nvm path to shell rc file: $1 shell rc file path
 {
@@ -46,5 +46,5 @@ nvm use node
 nvm alias default node
 
 y_install dart
-# shellcheck disable=SC2016
+#shellcheck disable=SC2016
 append_to 'export PATH="$PATH:/usr/lib/dart/bin"' "$HOME/.profile"

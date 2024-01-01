@@ -1,4 +1,7 @@
 
 Remaining
-4) create unit tests
-5) do ricing update.
+1) create unit tests
+2) logging / error handling
+3) create interactive menu so I can select which parts of the script should be ran.
+4) update README.md
+

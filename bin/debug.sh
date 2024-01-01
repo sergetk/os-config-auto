@@ -1,7 +1,7 @@
 #!/bin/bash
 ## file for debuggig specific part of the script
 
-source "./functions_util.sh"
+source "../lib/functions_util.sh"
 
 #curl -fsSL -o install_ohmyzsh.sh https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 #sh install_ohmyzsh.sh --unattended
@@ -33,3 +33,22 @@ source "./functions_util.sh"
 #append_to '[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"' "$HOME/.zshrc"
 #append_to 'export NVM_DIR="$HOME/.nvm"' "$PWD/todo.txt"
 #append_to '[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"' "$PWD/todo.txt"
+#y_install fd
+#y_install rg
+
+# email_location="$(dirname "$PWD")/email.txt"
+
+# if test -e "$email_location"
+# then
+#     email=$(cat "$email_location")
+#     printf "email = %s, user = %s\n" "$email" "$USER"
+#     git config --global user.name "$USER"
+#     git config --global user.email "$email" 
+
+#     echo '-----------------------------'
+#     git config --global user.name
+#     git config --global user.email
+    
+# else
+#     printf "no email loation specified"
+# fi 
