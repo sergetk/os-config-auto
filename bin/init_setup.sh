@@ -5,13 +5,14 @@
 # open until loop which uses state variable as flag
 # use case for each state
 
-state='os_setup' 
+local state='os_setup' 
+local stateLoc="$(dirname "$PWD")/state.txt}"
 
-if test -e "state.txt"
+if test -e "$stateLoc"
 then
-    state=$(cat state.txt)
+    state=$(cat "$stateLoc")
 else
-  printf 'os_setup' > state.txt
+  printf 'os_setup' > "$stateLoc" 
 fi 
 
 until [ "$state" == 'done' ] 
@@ -19,6 +20,9 @@ do
     case $state in
         'os_setup')
             sh "./os_setup.sh"
+            printf 'os_fixes' > state.txt ;;
+        'os_fixes')
+            sh "./os_fixes.sh"
             printf 'git_ssh_setup' > state.txt ;;
         'git_ssh_setup')
             sh "./git_ssh_setup.sh"

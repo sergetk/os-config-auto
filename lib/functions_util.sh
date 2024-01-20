@@ -5,9 +5,11 @@
 #: Version : 0.1
 #: Options : none
 
+local passLoc="$(dirname "$PWD")/pass.txt}"
+
 sudo_cmd() #@ USAGE: sudocmd $2 -sudo password file (default pass.txt); $1 - command to run; 
 {
-  pass="${2:-$(dirname "$PWD")/pass.txt}"
+  pass="${2:-$passLoc}"
   (cat "$pass") | sudo -S sh -c "$1" 
 }
 
@@ -15,7 +17,7 @@ sudo_cmd() #@ USAGE: sudocmd $2 -sudo password file (default pass.txt); $1 - com
 ## and automatically yes from prompt with yes | no options 
 y_install() #@ USAGE: aconfinst $2 -sudo password file (default pass.txt); $1 - package name;
 {
-  sudo_cmd "yes | pacman -S $1" "${2:-$(dirname "$PWD")/pass.txt}"
+  sudo_cmd "yes | pacman -S $1" "${2:-$passLoc}"
 }
 
 append_to() #@ $1 - command, $2 - target
