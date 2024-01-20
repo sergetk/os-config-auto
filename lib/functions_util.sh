@@ -5,7 +5,7 @@
 #: Version : 0.1
 #: Options : none
 
-local passLoc="$(dirname "$PWD")/pass.txt}"
+local passLoc="$(dirname "$PWD")/pass.txt"
 
 sudo_cmd() #@ USAGE: sudocmd $2 -sudo password file (default pass.txt); $1 - command to run; 
 {

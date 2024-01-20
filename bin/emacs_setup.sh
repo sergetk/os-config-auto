@@ -17,6 +17,3 @@ y_install shellcheck
 
 #zsh as main shell as it requires confirmation
 sudo_cmd "yes | chsh -s $(which zsh)"
-
-curl -fsSL -o install_ohmyzsh.sh https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-sh install_ohmyzsh.sh --unattended

@@ -5,8 +5,8 @@
 # open until loop which uses state variable as flag
 # use case for each state
 
-local state='os_setup' 
-local stateLoc="$(dirname "$PWD")/state.txt}"
+state='os_setup' 
+stateLoc="$(dirname "$PWD")/state.txt"
 
 if test -e "$stateLoc"
 then
