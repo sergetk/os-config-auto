@@ -1,7 +1,8 @@
 #!/bin/bash
 ## file for debuggig specific part of the script
+absPath="${PWD%%os-config-auto*}os-config-auto"
 
-source "../lib/functions_util.sh"
+. "${absPath}/bin/utils/util_functions.sh"
 
 #curl -fsSL -o install_ohmyzsh.sh https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 #sh install_ohmyzsh.sh --unattended
@@ -52,3 +53,37 @@ source "../lib/functions_util.sh"
 # else
 #     printf "no email loation specified"
 # fi 
+
+# Declare an indexed array of keys
+# keys=("key1" "key2" "key3")
+
+# # Declare an associative array to store arrays
+# declare -A assoc_array
+
+# # Assign arrays to associative array using keys
+# assoc_array["key1"]=("apple" "orange" "banana")
+# assoc_array["key2"]=("carrot" "broccoli" "spinach")
+# assoc_array["key3"]=("dog" "cat" "bird")
+
+# # Access and print arrays from the associative array
+# for key in "${keys[@]}"; do
+#   echo "$key: ${assoc_array[$key][@]}"
+# done
+
+function createAssArray(){
+
+    declare -A myAssocArray
+
+    array1=("apple" "banana" "cherry")
+
+    local -n ref_array=$array1
+
+    myAssocArray["key1"]=("${ref_array}")
+
+    echo "Array 1:"
+    for item in ${myAssocArray[key1]}; do
+        echo "$item"
+    done
+}
+
+createAssArray

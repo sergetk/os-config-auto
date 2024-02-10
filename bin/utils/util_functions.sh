@@ -1,11 +1,12 @@
 #!/bin/bash
-#: Titile  : functions_util.sh
+#: Titile  : util_functions.sh
 #: Author  : stk
 #: Description : collection of reusable functions 
 #: Version : 0.1
 #: Options : none
 
-local passLoc="$(dirname "$PWD")/pass.txt"
+absPath="${PWD%%os-config-auto*}os-config-auto"
+passLoc="${absPath}/pass.txt"
 
 sudo_cmd() #@ USAGE: sudocmd $2 -sudo password file (default pass.txt); $1 - command to run; 
 {
@@ -20,16 +21,36 @@ y_install() #@ USAGE: aconfinst $2 -sudo password file (default pass.txt); $1 - 
   sudo_cmd "yes | pacman -S $1" "${2:-$passLoc}"
 }
 
-append_to() #@ $1 - command, $2 - target
+append_to() #@ $1 - command/text, $2 - target, $3 - test mode (optional)
 {
-  printf "%b\n" "$1" >> "$2"
+  # printf is hard to overwrite from tests,use test flag ($3) instead, default 1 (false)
+  testMode="${3-:1}"
+  if [ "$testMode" = "0" ]
+  then
+      printf "%b\n" "$*"
+  else
+      printf "%b\n" "$1" >> "$2"
+  fi
 }
+
 
 append_to_i3() #@ append_to_i3  $1 - comment , $2 - command;
 {
   i3_target="$HOME/.i3/config"
   append_to "$1" "$i3_target"
   append_to "$2" "$i3_target"
+}
+
+write_to() #@ $1 - command/text, $2 - target, $3 - test mode (optional)
+{
+  # printf is hard to overwrite from tests,use test flag ($3) instead, default 1 (false)
+  testMode="${3-:1}"
+  if [ "$testMode" = "0" ]
+  then
+      printf "%b\n" "$*"
+  else
+      printf "%b\n" "$1" > "$2"
+  fi
 }
 
 gclone() #@ USAGE: gclone $1 - git url; $2 - new name of cloned repository (optional);
