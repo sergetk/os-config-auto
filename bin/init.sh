@@ -9,6 +9,16 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 # shellcheck source=/bin/constants/states.sh
 . "${absPath}/bin/constants/states.sh"
+. "${absPath}/bin/os/os_update.sh"
+. "${absPath}/bin/os/os_fixes.sh"
+. "${absPath}/bin/os/os_ssh_setup.sh"
+. "${absPath}/bin/git/git_ssh_setup.sh"
+. "${absPath}/bin/git/git_config_setup.sh"
+. "${absPath}/bin/git/git_repos_setup.sh"
+. "${absPath}/bin/soft/soft_misc.sh"
+. "${absPath}/bin/soft/soft_emacs.sh"
+. "${absPath}/bin/soft/soft_dev.sh"
+. "${absPath}/bin/utils/util_clean_up.sh"
 
 processState() {
    local state="$1" 
