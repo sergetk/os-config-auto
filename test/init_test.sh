@@ -9,7 +9,8 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 . "${absPath}/bin/init.sh"
 
 setUp() {
-   stateFile="./stubs/state.txt"
+   #stateFile="./stubs/state.txt"  
+    stateFile="${absPath}/test/stubs/state.txt"
    testState="$OS_UPDATE_STATE"
    printf "%s\n" "" > "$stateFile"
 

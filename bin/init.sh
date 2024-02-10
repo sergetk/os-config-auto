@@ -36,8 +36,8 @@ processState() {
 # $2 terminating state for test, for until loop
 init() {
     local state="$OS_UPDATE_STATE" 
-    local terminationState="${2-:$DONE_STATE}"
-    local stateLoc="${1-:${absPath}/state.txt}"
+    local terminationState="${2:-$DONE_STATE}"
+    local stateLoc="${1:-${absPath}/state.txt}"
 
     if test -e "$stateLoc"
     then
@@ -48,7 +48,10 @@ init() {
 
     until [ "$state" == "$terminationState" ] 
     do
-        processState "$state" "$stateLoc"
-        state=$(cat "$stateLoc")
+         processState "$state" "$stateLoc"
+         state=$(cat "$stateLoc")
     done
 }
+
+
+init
