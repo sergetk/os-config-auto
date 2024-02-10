@@ -1,9 +1,6 @@
 #!/bin/bash
 ##
 absPath="${PWD%%os-config-auto*}os-config-auto"
-
-# shellcheck source=/dev/null
-. "$HOME/.nvm/nvm.sh"
 . "${absPath}/bin/utils/util_functions.sh"
 
 installEmacs() {
