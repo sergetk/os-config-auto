@@ -3,10 +3,13 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 . "${absPath}/bin/constants/errors.sh"
 
+# generate users ssh folder and public private keys
+# $1 - file where generated ssh key will be saved 
+
 createSshKey() {
 
     [ $# -lt 1 ] && {
-        echo "$ERR_INVALID_PARAM_NUM"
+        printf "%s\n" "$ERR_INVALID_PARAM_NUM"
         exit 1
     }
 

@@ -10,7 +10,7 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 setUp() {
    #stateFile="./stubs/state.txt"  
-    stateFile="${absPath}/test/stubs/state.txt"
+   stateFile="${absPath}/test/stubs/state.txt"
    testState="$OS_UPDATE_STATE"
    printf "%s\n" "" > "$stateFile"
 
@@ -19,6 +19,11 @@ setUp() {
    updateOS() {
       printf "updateOS %s\n" "$*"
       return 0
+   }
+
+   createGitToken(){
+       printf "createGitToken %s\n" "$*"
+       return 0
    }
 }
 
@@ -36,10 +41,10 @@ validateValues() {
    msg=$("${cmd[@]}") 
    exitCode=$?
 
-    assertEquals "$expectedMsg" "$msg"
-    assertEquals "$expectedExitCode" "$exitCode"
-    currentState=$(< "$stateFile")
-    assertEquals "$expectedState" "$currentState"
+   assertEquals "$expectedMsg" "$msg"
+   assertEquals "$expectedExitCode" "$exitCode"
+   currentState=$(< "$stateFile")
+   assertEquals "$expectedState" "$currentState"
 
 }
 
@@ -58,6 +63,11 @@ testProcessStateTransitionCmdFailed() {
 
 testProcessState() {
     validateValues "processState $testState $stateFile"  "updateOS " "$OS_FIXES_STATE" 0
+}
+
+testProcessStateWithParams(){
+    testState="$GIT_SSH_STATE"
+    validateValues "processState $testState $stateFile"  "createGitToken ${stateFuncParams["$GIT_SSH_FUNC"]}" "$GIT_CONFIG_STATE" 0
 }
 
 testInitSuccessStateFileExist() {

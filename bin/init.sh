@@ -22,7 +22,7 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 processState() {
    local state="$1" 
-   local stateLoc="${2-:${absPath}/state.txt}"
+   local stateLoc="${2-:$DEFAULT_STATE_LOCATION}"
    local transition="${stateTransitions["$state"]}"
 
    [ -z "$transition" ] && {
@@ -31,8 +31,15 @@ processState() {
    }
    
    read -ra stateTransition <<< "$transition"
+   transitionFunc="${stateTransition[0]}"
+   transitionFuncParams="${stateFuncParams[$transitionFunc]}"
 
-   "${stateTransition[0]}"
+   #echo "--- function = $transitionFunc"
+   #echo "--- function params = $transitionFuncParams"
+   #declare -F
+   #type "$transitionFunc"
+
+   "${transitionFunc}" "$transitionFuncParams"
    [ "$?" == 1 ] && {
        printf "Command %s failed\n" "${stateTransition[0]}"
        return 1
@@ -45,9 +52,10 @@ processState() {
 # $1 optional location of the state file, for testing, default state.txt
 # $2 terminating state for test, for until loop
 init() {
+    
     local state="$OS_UPDATE_STATE" 
     local terminationState="${2:-$DONE_STATE}"
-    local stateLoc="${1:-${absPath}/state.txt}"
+    local stateLoc="${1:-$DEFAULT_STATE_LOCATION}"
 
     if test -e "$stateLoc"
     then
@@ -64,4 +72,4 @@ init() {
 }
 
 
-init
+init "$O"
