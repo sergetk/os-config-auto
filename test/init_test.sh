@@ -22,7 +22,7 @@ setUp() {
    }
 
    createGitToken(){
-       printf "createGitToken %s\n" "$*"
+       printf "createGitToken paramsNum=%s %s\n" "$#" "$*"
        return 0
    }
 }
@@ -67,7 +67,7 @@ testProcessState() {
 
 testProcessStateWithParams(){
     testState="$GIT_SSH_STATE"
-    validateValues "processState $testState $stateFile"  "createGitToken ${stateFuncParams["$GIT_SSH_FUNC"]}" "$GIT_CONFIG_STATE" 0
+    validateValues "processState $testState $stateFile"  "createGitToken paramsNum=4 ${stateFuncParams["$GIT_SSH_FUNC"]}" "$GIT_CONFIG_STATE" 0
 }
 
 testInitSuccessStateFileExist() {

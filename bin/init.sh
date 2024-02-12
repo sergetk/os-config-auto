@@ -32,14 +32,18 @@ processState() {
    
    read -ra stateTransition <<< "$transition"
    transitionFunc="${stateTransition[0]}"
-   transitionFuncParams="${stateFuncParams[$transitionFunc]}"
+   transitionFuncParamsStr="${stateFuncParams[$transitionFunc]}"
 
+   transitionFuncParams=();
+   [ -z "$transitionFuncParamsStr" ] || {
+      read -ra transitionFuncParams <<< "$transitionFuncParamsStr"
+   }
    #echo "--- function = $transitionFunc"
    #echo "--- function params = $transitionFuncParams"
    #declare -F
    #type "$transitionFunc"
 
-   "${transitionFunc}" "$transitionFuncParams"
+   "${transitionFunc}" "${transitionFuncParams[@]}"
    [ "$?" == 1 ] && {
        printf "Command %s failed\n" "${stateTransition[0]}"
        return 1
