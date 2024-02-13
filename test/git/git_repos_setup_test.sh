@@ -23,10 +23,10 @@ testCloneGitRepos() {
 
     msg=$(cloneGitRepos)
     exitCode=$?
-    assertContains "$msg" "emacs.d .emacs.d"
-    assertContains "$msg" "notes .notes"
-    assertContains "$msg" "kbdx"
-    assertContains "$msg" "https://aur.archlinux.org/nordvpn-bin.git"
+    assertContains "$msg" "emacs.d $HOME/.emacs.d"
+    assertContains "$msg" "notes $HOME/.notes"
+    assertContains "$msg" "kbdx $HOME/kbdx"
+    assertContains "$msg" "https://aur.archlinux.org/nordvpn-bin.git $HOME/nordvp"
     assertEquals "$exitCode" "0"
 
 }
