@@ -23,7 +23,7 @@ installMisc() {
     sed -i 's/bottom/top/g' ~/.i3/config 
 
     #installing brave browser
-    sudo_cmd "sed -Ei 'EnableAUR/s/^#//' /etc/pamac.conf"
+    sudo_cmd "sed -i 's/^#EnableAUR/EnableAUR/' /etc/pamac.conf"
 
     y_install brave-browser
     sed -i 's/palemoon/brave/' ~/.i3/config
