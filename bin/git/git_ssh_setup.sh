@@ -1,8 +1,11 @@
 #!/bin/bash
 ## 
-absPath="${PWD%%os-config-auto*}/os-config-auto"
+absPath="${PWD%%os-config-auto*}os-config-auto"
 
+# shellcheck sourse= "../constants/errors.sh"
 . "${absPath}/bin/constants/errors.sh"
+# shellcheck sourse= "../constants/defaults.sh"
+. "${absPath}/bin/constants/defaults.sh"
 
 #@ run : creates local ssh keys, uploads ssh public key to github
 ## creates git email username global configuration  
@@ -12,41 +15,46 @@ absPath="${PWD%%os-config-auto*}/os-config-auto"
 ## $4  - ssh pub-key location (required)
 
 createGitToken() {
+  # shellcheck sourse="../constants/errors.sh"
+  . "${absPath}/bin/constants/errors.sh"
+  # shellcheck sourse="../constants/defaults.sh"
+  . "${absPath}/bin/constants/defaults.sh"
 
-    [ $# -lt 4 ] && {
-        echo "$ERR_INVALID_PARAM_NUM"
-        exit 1
-    }
+    SALT_FILE="${1:-$DEFAULT_SALT_LOCATION}"
+    PASS_FILE="${2:-$DEFAULT_PASS_LOCATION}" 
+    TOKEN_FILE="${3:-$DEFAULT_TOKEN_LOCATION}"
+    SSH_FILE="${4:-$DEFAULT_PUB_SSH_LOCATION}"
     
-    [ -e "$1" ] || {
+    [ -e "$SALT_FILE" ] || {
       echo "$ERR_SALT_MISSING" 
       exit 1
     } 
      
-    [ -e "$2" ] || {
+    [ -e "$PASS_FILE" ] || {
       echo "$ERR_PASS_MISSING"
       exit 1
     }
 
-    [ -z "$3" ] && {
+    printf "%s" "" > "$TOKEN_FILE"
+    [ $? = 0 ] || {
        echo "$ERR_TOKEN_MISSING"
        exit 1
     }
 
-    [ -e "$4" ] || {
+    [ -e "$SSH_FILE" ] || {
        echo "$ERR_SSH_DIR"
        exit 1
     }
 
-    openssl enc -d -aes-256-cbc -in "$1" -out "$3" -pass file:"$2" -iter 1000 || 
+    openssl enc -d -aes-256-cbc -in "$SALT_FILE" -out "$TOKEN_FILE" -pass file:"$PASS_FILE" -iter 1000 || 
     {
         echo "$ERR_SSL"
         exit 1
     }
 
     set -e
-    TOKEN=$(< "$3") 
-    PUBKEY=$(< "$4")
+    TOKEN=$(< "$TOKEN_FILE") 
+    PUBKEY=$(< "$SSH_FILE")
         
     curl -L -X POST -H "Accept: application/vnd.github+json" \
                     -H "Authorization: Bearer $TOKEN" \
