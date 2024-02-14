@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ## file for debuggig specific part of the script
 absPath="${PWD%%os-config-auto*}os-config-auto"
 
@@ -49,7 +50,7 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 #     echo '-----------------------------'
 #     git config --global user.name
 #     git config --global user.email
-    
+
 # else
 #     printf "no email loation specified"
 # fi 
@@ -72,18 +73,18 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 function createAssArray(){
 
-    declare -A myAssocArray
+  declare -A myAssocArray
 
-    array1=("apple" "banana" "cherry")
+  array1=("apple" "banana" "cherry")
 
-    local -n ref_array=$array1
+  local -n ref_array=$array1
 
-    myAssocArray["key1"]=("${ref_array}")
+  myAssocArray["key1"]=("${ref_array}")
 
-    echo "Array 1:"
-    for item in ${myAssocArray[key1]}; do
-        echo "$item"
-    done
+  echo "Array 1:"
+  for item in ${myAssocArray[key1]}; do
+    echo "$item"
+  done
 }
 
 createAssArray

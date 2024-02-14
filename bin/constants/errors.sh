@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export ERR_INVALID_PARAM_NUM="Invalid number of parameters!"
 export ERR_SALT_MISSING="Salt token file is missing!"

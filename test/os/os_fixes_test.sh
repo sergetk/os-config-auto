@@ -1,11 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 absPath="${PWD%%os-config-auto*}os-config-auto"
 
-. "${absPath}/bin/os/os_fixes.sh"
-
 setUp() {
-    . "${absPath}/bin/os/os_fixes.sh"
+  . "${absPath}/bin/os/os_fixes.sh"
 }
 
 testApplyOsFixes() {
@@ -26,7 +24,6 @@ testApplyOsFixes() {
 
   msg=$(applyOsFixes)
   exitCode=$?
-  #echo "--- $msg"
   assertContains "$msg" "pulseaudio-alsa"
   assertContains "$msg" "geoclue2"
   assertContains "$msg" "systemctl start geoclue"
@@ -42,9 +39,9 @@ testApplyOsFixes() {
 }
 
 oneTimeTearDown() {
-    unset append_to_i3
-    unset y_install
-    unset sudo_cmd
+  unset append_to_i3
+  unset y_install
+  unset sudo_cmd
 }
 
 . "${absPath}/lib/shunit2/shunit2"

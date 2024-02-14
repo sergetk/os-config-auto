@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 #: Titile  : util_functions.sh
 #: Author  : stk
 #: Description : collection of reusable functions 
@@ -27,12 +28,11 @@ append_to() #@ $1 - command/text, $2 - target, $3 - test mode (optional)
   testMode="${3-:1}"
   if [ "$testMode" = "0" ]
   then
-      printf "%b\n" "$*"
+    printf "%b\n" "$*"
   else
-      printf "%b\n" "$1" >> "$2"
+    printf "%b\n" "$1" >> "$2"
   fi
 }
-
 
 append_to_i3() #@ append_to_i3  $1 - comment , $2 - command;
 {
@@ -47,9 +47,9 @@ write_to() #@ $1 - command/text, $2 - target, $3 - test mode (optional)
   testMode="${3-:1}"
   if [ "$testMode" = "0" ]
   then
-      printf "%b\n" "$*"
+    printf "%b\n" "$*"
   else
-      printf "%b\n" "$1" > "$2"
+    printf "%b\n" "$1" > "$2"
   fi
 }
 
@@ -66,5 +66,5 @@ gclone() #@ USAGE: gclone $1 - git url; $2 - new name of cloned repository (opti
 
 gclone_p() #@ USAGE: gclone_p $1 - name of personal repository; $2 - alternative name for directory (optional);
 {
-   gclone "git@github.com:sergetk/$1.git" "${2:-$1}"
+  gclone "git@github.com:sergetk/$1.git" "${2:-$1}"
 }

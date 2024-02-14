@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 absPath="${PWD%%os-config-auto*}os-config-auto"
 

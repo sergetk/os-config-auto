@@ -9,20 +9,20 @@ setUp() {
 }
 
 testUpdateOs() {
-   sudo_cmd() {
-     printf "%s\n" "$*"
-     return 0
-   } 
+  sudo_cmd() {
+    printf "%s\n" "$*"
+    return 0
+  } 
 
-   msg=$(updateOS)
-   exitCode=$?
+  msg=$(updateOS)
+  exitCode=$?
 
-   assertContains "$msg"  "yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*"
-   assertEquals "0" "$exitCode"
+  assertContains "$msg"  "yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*"
+  assertEquals "0" "$exitCode"
 }
 
 oneTimeTearDown() {
-   unset sudo_cmd 
+  unset sudo_cmd 
 }
 
 . "${absPath}/lib/shunit2/shunit2"

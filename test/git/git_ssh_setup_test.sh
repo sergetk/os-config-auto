@@ -8,7 +8,7 @@ stubToken="${stubsPath}/token.txt"
 stubRsa="${stubsPath}/ssh/id_rsa.pub"
 
 setUp() {
- . "${absPath}/bin/git/git_ssh_setup.sh"
+  . "${absPath}/bin/git/git_ssh_setup.sh"
 }
 
 # validate results
@@ -17,30 +17,30 @@ setUp() {
 # $3 - expected exit code
 
 validateTestResult() {
-   read -a cmdParams <<< $1
-   expectedMsg=$2
-   expectedExitCode=$3
+  read -a cmdParams <<< $1
+  expectedMsg=$2
+  expectedExitCode=$3
 
-   msg=$(${cmdParams[@]})
-   actualExitCode=$?
-   assertContains "$msg" "$expectedMsg"
-   assertEquals "$expectedExitCode" "$actualExitCode" 
+  msg=$(${cmdParams[@]})
+  actualExitCode=$?
+  assertContains "$msg" "$expectedMsg"
+  assertEquals "$expectedExitCode" "$actualExitCode" 
 }
 
 testInvalidSaltTokenLocation() {
-   validateTestResult "createGitToken salt.txt $stubPass $stubToken ../stubs/" "$ERR_SALT_MISSING" 1
+  validateTestResult "createGitToken salt.txt $stubPass $stubToken ../stubs/" "$ERR_SALT_MISSING" 1
 }
 
 testInvalidPasswordFileLocation(){
-   validateTestResult "createGitToken $stubSalt pass.txt $stubToken ./" "$ERR_PASS_MISSING" 1
+  validateTestResult "createGitToken $stubSalt pass.txt $stubToken ./" "$ERR_PASS_MISSING" 1
 }
 
 testInvalidTokenLocation(){
-   validateTestResult "createGitToken $stubSalt $stubPass ./ ./ssh" "$ERR_TOKEN_MISSING" 1
+  validateTestResult "createGitToken $stubSalt $stubPass ./ ./ssh" "$ERR_TOKEN_MISSING" 1
 }
 
 testInvalidSshDirectory(){
-   validateTestResult "createGitToken $stubSalt $stubPass $stubToken ./sshh" "$ERR_SSH_DIR" 1
+  validateTestResult "createGitToken $stubSalt $stubPass $stubToken ./sshh" "$ERR_SSH_DIR" 1
 }
 
 testOpenSslFailed(){
@@ -59,7 +59,7 @@ testCurlFailed() {
   curl() {
     return 1 
   }
- 
+  
   validateTestResult "createGitToken $stubSalt $stubPass $stubToken $stubRsa" "Curl failed" 1
 }
 
@@ -83,8 +83,8 @@ testSuccess() {
 }
 
 oneTimeTearDown() {
-    unset curl
-    unset openssl
+  unset curl
+  unset openssl
 }
 
 . "${absPath}/lib/shunit2/shunit2"

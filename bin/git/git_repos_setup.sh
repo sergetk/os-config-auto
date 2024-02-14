@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ##: Description    : Script used to clone all my repositories.
 
 absPath="${PWD%%os-config-auto*}os-config-auto"

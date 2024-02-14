@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #: Title        : apply fixes to os 
 #: Author       : sergetk
 #: Description  : fix issue that fresh installtion has

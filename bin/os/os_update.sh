@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #: Title        : update_os
 #: Author       : sergetk
 #: Description  : update manjaro
@@ -6,9 +6,7 @@
 #: Options      : none
 
 absPath="${PWD%%os-config-auto*}os-config-auto"
-
 . "${absPath}/bin/utils/util_functions.sh"
-
 
 updateOS(){
   # update manjaro
