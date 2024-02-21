@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 ##
+
 absPath="${PWD%%os-config-auto*}os-config-auto"
-. "${absPath}/bin/utils/util_functions.sh"
+# shellcheck source="../utils/util_functions.sh"
+. "${absPath}"/bin/utils/util_functions.sh
 
 installDev(){
   # shellcheck source=/dev/null

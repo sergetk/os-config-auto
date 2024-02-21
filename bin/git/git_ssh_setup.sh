@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 ## 
 absPath="${PWD%%os-config-auto*}os-config-auto"
-# shellcheck sourse= "../constants/errors.sh"
+# shellcheck source="../constants/errors.sh"
 . "${absPath}/bin/constants/errors.sh"
-# shellcheck sourse= "../constants/defaults.sh"
+# shellcheck source="../constants/defaults.sh"
 . "${absPath}/bin/constants/defaults.sh"
 
 #@ run : creates local ssh keys, uploads ssh public key to github
@@ -14,9 +14,9 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 ## $4  - ssh pub-key location (test)
 
 createGitToken() {
-  # shellcheck sourse="../constants/errors.sh"
+  # shellcheck source="../constants/errors.sh"
   . "${absPath}/bin/constants/errors.sh"
-  # shellcheck sourse="../constants/defaults.sh"
+  # shellcheck source="../constants/defaults.sh"
   . "${absPath}/bin/constants/defaults.sh"
 
   SALT_FILE="${1:-$DEFAULT_SALT_LOCATION}"
