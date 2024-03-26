@@ -38,10 +38,6 @@ processState() {
   [ -z "$transitionFuncParamsStr" ] || {
     read -ra transitionFuncParams <<< "$transitionFuncParamsStr"
   }
-  #echo "--- function = $transitionFunc"
-  #echo "--- function params = $transitionFuncParams"
-  #declare -F
-  #type "$transitionFunc"
 
   "${transitionFunc}" "${transitionFuncParams[@]}"
   [ "$?" == 1 ] && {

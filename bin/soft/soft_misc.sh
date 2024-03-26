@@ -21,6 +21,7 @@ installMisc() {
 
   y_install feh
   y_install keepass 
+  y_install unrar
 
   sed -i 's/bottom/top/g' ~/.i3/config 
 
