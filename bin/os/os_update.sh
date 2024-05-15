@@ -10,5 +10,12 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 updateOS(){
   # update manjaro
-  sudo_cmd "yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*"
+  sudo_cmd "echo 'Starting'"
+  #sudo_cmd "
+  #sudo pacman -s pacman-contrib
+  #yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*
+  sudo_cmd "yes | mhwd-kernel -i linux66 rmc"
+  sudo_cmd "pacman-mirrors --fasttrack"
+  sudo_cmd "yes $'yes\nyes\nyes\nyes\nyes\n1\n88\yes' | pacman -Syyu"
+  
 }
