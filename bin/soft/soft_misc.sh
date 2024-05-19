@@ -20,6 +20,10 @@ append_nvm_to_shellrc() #@ append nvm path to shell rc file: $1 shell rc file pa
 installMisc() {
 
   y_install feh
+  #copy wallpapers.sh to .config directory
+  cp $HOME/os-auto-confg/scripts/wallpaper.sh $HOME/.config/
+  append_to_i3 "# load wallpaper script " "exec_always --no-startup-id sh ~/.config/wallpaper.sh"
+  
   y_install keepass 
   y_install unrar
 

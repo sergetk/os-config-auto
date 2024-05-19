@@ -8,6 +8,7 @@ cloneGitRepos() {
   gclone_p emacs.d "$HOME/.emacs.d"
   gclone_p notes "$HOME/.notes"
   gclone_p kbdx "$HOME/kbdx"
+  gclone_p wallpapers "$HOME/.config/wallpapers"
   gclone https://aur.archlinux.org/nordvpn-bin.git "$HOME/nordvpn"
   # cd nordvpn-bin
   # sudo pacman -U nordvpn-bin-*.*

@@ -13,5 +13,5 @@ installDev(){
   y_install shellcheck
 
   #zsh as main shell as it requires confirmation
-  sudo_cmd "yes | chsh -s $(which zsh)"
+  sudo_cmd "yes | chsh -s $(which zsh) $USER"
 }
