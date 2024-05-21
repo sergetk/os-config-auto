@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
-wallpapers=("abstract_ball" "black_orange" "chess_art" "concrete_art" "desert_water" "exploring_worlds" "green_city" "hartbeat-uw" "ice_cubes" "moon_ny" "sad_mood" "science_fiction" "sf_art" "spacecat" "space_kitten" "spacemonkey" "tokyo")
 
-#@ return exit code
-#$ index
-setWallpaperByIndex() {
-  local default_wallpaper_path="$HOME/.config/wallpapers"
-  local index=$1
-  local wallpaperPath="$default_wallpaper_path/${wallpapers[index]}.jpg"
-  
-  feh --no-fehbg --bg-fill $wallpaperPath
-}
-
+#$ [testMode]
 setRandomWallpaper() {
-  local index=$(( RANDOM % ${#wallpapers[@]} ))
-  setWallpaperByIndex "$index"
+  local testMode=${1:-1}
+  local command="> /dev/null 2>&1"
+
+  
+  for x in {0..1}
+  do
+    if [ "$testMode" -eq 0 ]
+    then
+      nitrogen --set-zoom-fill --random "$HOME/.config/wallpapers" --head="$x" > /dev/null 2>&1
+    else
+      nitrogen --set-zoom-fill --random "$HOME/.config/wallpapers" --head="$x"
+    fi
+  done
 }
 
 setRandomWallpaper $@
