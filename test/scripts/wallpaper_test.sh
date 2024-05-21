@@ -21,6 +21,5 @@ oneTimeTearDown() {
   unset nitrogen
 }
 
-
 # shellcheck source=../lib/shunit2/shunit2
 . "${absPath}/lib/shunit2/shunit2"
