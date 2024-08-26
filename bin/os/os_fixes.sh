@@ -13,7 +13,11 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 applyOsFixes() {
   # fixes sound on fresh manjaro installation
-  y_install pulseaudio-alsa 
+  y_install pulseaudio-alsa
+
+  # another sound package
+  y_install wireplumber
+  y_install pipewire-pulse
 
   #install geoclue required for red-shift
   y_install geoclue2

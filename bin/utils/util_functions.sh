@@ -12,7 +12,7 @@ passLoc="${absPath}/pass.txt"
 sudo_cmd() #@ USAGE: sudocmd $2 -sudo password file (default pass.txt); $1 - command to run; 
 {
   pass="${2:-$passLoc}"
-  (cat "$pass") | sudo -S sh -c "$1" 
+  (cat "$pass") | sudo -S sh -c "$1"
 }
 
 ## function which installs software package with root previledges
@@ -67,4 +67,29 @@ gclone() #@ USAGE: gclone $1 - git url; $2 - new name of cloned repository (opti
 gclone_p() #@ USAGE: gclone_p $1 - name of personal repository; $2 - alternative name for directory (optional);
 {
   gclone "git@github.com:sergetk/$1.git" "${2:-$1}"
+}
+
+isValidPathFormat() #@ USAGE: isVliadPathFormat $1 - path;
+{
+  if [[ "$1" =~ ^[.~]?(\/[a-zA-Z0-9_-]+)+[\/]?$ ]]; then
+    return 0
+  fi  
+  return 1
+}
+
+createDir() #@ USAGE: createDir $1 - path;
+{
+  isValidPathFormat $1
+  
+  if [ $? -eq 0 ]; then
+    mkdir -p $1
+    if [ -d $1 ]; then
+      printf "Directory created at %s" $1
+      return 0
+    fi
+    printf "error: calling mkdir -p $1\n"
+    return 1
+  fi
+  printf "invalid path = %s\n" $1
+  return 1
 }
