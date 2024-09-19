@@ -30,15 +30,16 @@ append_to() #@ $1 - command/text, $2 - target, $3 - test mode (optional)
   then
     printf "%b\n" "$*"
   else
-    printf "%b\n" "$1" >> "$2"
+    printf "%b\n" "$1" >> "$2" 2>&1
   fi
 }
 
-append_to_i3() #@ append_to_i3  $1 - comment , $2 - command;
+append_to_i3() #@ append_to_i3  $1 - comment , $2 - command; $3 - test mode (optional)
 {
+  testMode="${3-:1}"
   i3_target="$HOME/.i3/config"
-  append_to "$1" "$i3_target"
-  append_to "$2" "$i3_target"
+  append_to "$1" "$i3_target" "$testMode"
+  append_to "$2" "$i3_target" "$testMode"
 }
 
 write_to() #@ $1 - command/text, $2 - target, $3 - test mode (optional)
@@ -87,9 +88,29 @@ createDir() #@ USAGE: createDir $1 - path;
       printf "Directory created at %s" $1
       return 0
     fi
-    printf "error: calling mkdir -p $1\n"
+    printf "error: calling mkdir -p $1"
     return 1
   fi
-  printf "invalid path = %s\n" $1
+  printf "invalid path = %s" $1
+  return 1
+}
+
+pathExists() #@ USAGE: check if path is directory
+{
+  [ -z $1 ] && return 1 || [ -e $1 ] && return 0 || return 1
+}
+
+containsText() { #@ USAGE: containsText $1 - text; $2 - path;
+  [ -z $1 ] && return 1
+  pathExists $2
+  
+  if [ $? -eq 0 ]
+  then
+    grep -q "$1" "$2"
+    return $?
+  else
+    return 1
+  fi
+  
   return 1
 }

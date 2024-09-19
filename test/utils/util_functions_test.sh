@@ -64,14 +64,9 @@ testAppendTo() {
 }
 
 testAppendToI3() {
-  append_to() {
-    printf "%s\n" "$*" 
-    return 0
-  }
-  
-  msg=$(append_to_i3 "Hello" "world")
+  msg=$(append_to_i3 "Hello" "world" 0)
   exitCode=$?
-  
+
   i3_target="$HOME/.i3/config"
   assertContains "$msg"  "Hello $i3_target"
   assertContains "$msg"  "world $i3_target"
@@ -133,10 +128,46 @@ testCreateDir() {
   currentDir="./foo/bar"
   msg=$(createDir "$currentDir")
   exitCode=$?
-  assertEquals "Directory created at ./foo/bar" "$msg"
+  assertEquals "Directory created at $currentDir" "$msg"
   assertEquals 0 "$exitCode"
 
   rm -r  "./foo"
+}
+
+testCreateDirErrorInvalidPath() {
+  currentDir=""
+  msg=$(createDir "$currentDir")
+  exitCode=$?
+  assertEquals "invalid path = $currentDir" "$msg"
+  assertEquals 1 "$exitCode"
+}
+
+testPathExists(){
+  mkdir foo
+  pathExists "foo"
+  assertTrue 'invalid directory' $?
+
+  touch baz.txt
+  pathExists "$PWD/baz.txt"
+  assertTrue "path doesnt exists" $? 
+  rm -rf foo
+  rm -rf baz.txt
+}
+
+testContainsText(){
+  file="$PWD/test.txt"
+  touch $file
+  append_to "foo" "$file"
+  
+  containsText 'foo' "$file"
+  assertTrue  $?
+
+  containsText 'foo' ""
+  assertFalse $?
+
+  containsText "baz" "$file"
+  assertFalse $?
+  rm $file
 }
 
 # takes four parameters
