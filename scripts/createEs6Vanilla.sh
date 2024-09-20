@@ -19,7 +19,6 @@ createEs6Project() { #@ USAGE: createEs6Project , S1 - path to the project
     printf "failed to create path = %b\n" "$1"
     return 1
   }
-  echo "--- !!!!----"
   cd $1
   createProjectJson
   setupEslint
