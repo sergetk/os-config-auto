@@ -16,6 +16,5 @@ updateOS(){
   #yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*
   sudo_cmd "yes | mhwd-kernel -i linux66 rmc"
   sudo_cmd "pacman-mirrors --fasttrack"
-  sudo_cmd "yes $'yes\nyes\nyes\nyes\nyes\n1\n88\nyes' | pacman -Syyu"
-  
+  sudo_cmd "yes $'yes\nyes\nyes\nyes\nyes\nyes\nyes\n88\nyes' | pacman -Syyu"  
 }
