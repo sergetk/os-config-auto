@@ -6,8 +6,10 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 testDefaults() {
   assertEquals "${absPath}/email.txt" "$DEFAULT_EMAIL_LOCATION"
+  assertEquals "$HOME/.ssh" "$DEFAULT_SSH_DIR"
   assertEquals "$HOME/.ssh/id_rsa" "$DEFAULT_SSH_LOCATION"
   assertEquals "$HOME/.ssh/id_rsa.pub" "$DEFAULT_PUB_SSH_LOCATION"
+  assertEquals "$HOME/.ssh/known_hosts" "$DEFAULT_HOSTS_SSH_LOCATION"
   assertEquals "${absPath}/gt.enc" "$DEFAULT_SALT_LOCATION"
   assertEquals "${absPath}/pass.txt" "$DEFAULT_PASS_LOCATION"
   assertEquals "${absPath}/token.txt" "$DEFAULT_TOKEN_LOCATION"

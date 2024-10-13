@@ -97,12 +97,12 @@ createDir() #@ USAGE: createDir $1 - path;
 
 pathExists() #@ USAGE: check if path is directory
 {
-  [ -z $1 ] && return 1 || [ -e $1 ] && return 0 || return 1
+  [ -z "$1" ] && return 1 || [ -e "$1" ] && return 0 || return 1
 }
 
 containsText() { #@ USAGE: containsText $1 - text; $2 - path;
-  [ -z $1 ] && return 1
-  pathExists $2
+  [ -z "$1" ] && return 1
+  pathExists "$2"
   
   if [ $? -eq 0 ]
   then

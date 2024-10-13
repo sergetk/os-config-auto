@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 
 absPath="${PWD%%os-config-auto*}os-config-auto"
-
 . "${absPath}/bin/os/os_ssh_setup.sh"
 
 sshDir="${absPath}/test/stubs/ssh"
-
-setUp() {
-  . "${absPath}/bin/os/os_ssh_setup.sh"
-}
 
 testInvalidParamsNumber() {
   errorMsg=$(createSshKey)

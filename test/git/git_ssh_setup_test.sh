@@ -7,9 +7,8 @@ stubPass="${stubsPath}/pass.txt"
 stubToken="${stubsPath}/token.txt"
 stubRsa="${stubsPath}/ssh/id_rsa.pub"
 
-setUp() {
-  . "${absPath}/bin/git/git_ssh_setup.sh"
-}
+. "${absPath}/bin/git/git_ssh_setup.sh"
+
 
 # validate results
 # $1 - command and parameters string
@@ -23,6 +22,7 @@ validateTestResult() {
 
   msg=$(${cmdParams[@]})
   actualExitCode=$?
+  # printf "####### %s" "$msg"
   assertContains "$msg" "$expectedMsg"
   assertEquals "$expectedExitCode" "$actualExitCode" 
 }
@@ -59,7 +59,7 @@ testCurlFailed() {
   curl() {
     return 1 
   }
-  
+
   validateTestResult "createGitToken $stubSalt $stubPass $stubToken $stubRsa" "Curl failed" 1
 }
 

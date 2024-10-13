@@ -157,9 +157,9 @@ testPathExists(){
 testContainsText(){
   file="$PWD/test.txt"
   touch $file
-  append_to "foo" "$file"
+  append_to "foo bar" "$file"
   
-  containsText 'foo' "$file"
+  containsText 'foo bar' "$file"
   assertTrue  $?
 
   containsText 'foo' ""

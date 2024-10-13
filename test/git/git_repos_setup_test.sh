@@ -2,9 +2,19 @@
 
 absPath="${PWD%%os-config-auto*}os-config-auto"
 . "${absPath}/bin/git/git_repos_setup.sh"
+. "${absPath}/bin/utils/util_functions.sh"
 
-setUp() {
-  . "${absPath}/bin/git/git_repos_setup.sh"
+# setUp() {
+#   . "${absPath}/bin/git/git_repos_setup.sh"
+# }
+
+sshDir="${absPath}/test/stubs/ssh"
+
+testInvalidParamNum() {
+  msg=$(cloneGitRepos)
+  exitCode=$?
+  assertContains "$msg" "$ERR_INVALID_PARAM_NUM"
+  assertEquals "$exitCode" "1"
 }
 
 testCloneGitRepos() {
@@ -18,7 +28,7 @@ testCloneGitRepos() {
     return 0
   }
 
-  msg=$(cloneGitRepos)
+  msg=$(cloneGitRepos "${sshDir}/known_hosts")
   exitCode=$?
   assertContains "$msg" "emacs.d $HOME/.emacs.d"
   assertContains "$msg" "notes $HOME/.notes"
@@ -26,6 +36,12 @@ testCloneGitRepos() {
   assertContains "$msg" "wallpapers $HOME/.config/wallpapers"
   assertContains "$msg" "https://aur.archlinux.org/nordvpn-bin.git $HOME/nordvp"
   assertEquals "$exitCode" "0"
+
+  containsText "${GIT_SSH_HOSTS_ENTRY}" "${sshDir}/known_hosts"
+  containsExitCode=$?
+  assertEquals "$containsExitCode" "0"
+
+  write_to "" "${sshDir}/known_hosts"
 }
 
 oneTimeTearDown() {

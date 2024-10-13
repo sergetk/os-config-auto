@@ -4,3 +4,4 @@ token.txt
 temp.sh
 state.txt
 /lib/shunit2
+!/test/stubs/pass.txt

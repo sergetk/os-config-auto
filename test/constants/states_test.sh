@@ -67,7 +67,7 @@ testStatesFuncParams() {
   assertEquals "$DEFAULT_SSH_LOCATION" "${stateFuncParams[${OS_SSH_FUNC}]}"
   assertEquals "$DEFAULT_SALT_LOCATION $DEFAULT_PASS_LOCATION $DEFAULT_TOKEN_LOCATION $DEFAULT_PUB_SSH_LOCATION" "${stateFuncParams[${GIT_SSH_FUNC}]}"
   assertEquals "$DEFAULT_EMAIL_LOCATION" "${stateFuncParams[${GIT_CONFIG_FUNC}]}"
-  assertEquals "" "${stateFuncParams[${GIT_REPOS_FUNC}]}"
+  assertEquals "$DEFAULT_HOSTS_SSH_LOCATION" "${stateFuncParams[${GIT_REPOS_FUNC}]}"
   assertEquals "" "${stateFuncParams[${SOFT_MISC_FUNC}]}"
   assertEquals "" "${stateFuncParams[${SOFT_EMACS_FUNC}]}"
   assertEquals "" "${stateFuncParams[${SOFT_DEV_FUNC}]}"
