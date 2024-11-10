@@ -17,5 +17,10 @@ updateOS(){
   #sudo_cmd "yes | mhwd-kernel -i linux69 rmc"
   #sudo_cmd "pacman-mirrors --fasttrack"
   #sudo_cmd "yes $'yes\nyes\nyes\nyes\nyes\nyes\nyes\n88\nyes' | pacman -Syyu"
+  sudo_cmd "timedatectl set-timezone Pacific/Auckland"
+  sudo_cmd "timedatectl set-ntp true"
+  sudo_cmd "pacman-key --refresh-keys"
+  sudo_cmd "pacman-key --init"
+  sudo_cmd "pacman-key --populate"
   sudo_cmd "yes | pacman -Syyu"
 }
