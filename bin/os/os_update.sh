@@ -22,5 +22,6 @@ updateOS(){
   sudo_cmd "pacman-key --refresh-keys"
   sudo_cmd "pacman-key --init"
   sudo_cmd "pacman-key --populate"
+  sudo_cmd "yes | pacman -Sy archlinux-keyring manjaro-keyring"
   sudo_cmd "yes | pacman -Syyu"
 }
