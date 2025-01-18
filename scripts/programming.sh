@@ -21,8 +21,7 @@ setupEslint() {
   npm i --save-dev globals 1> /dev/null
 
   #create config file
-  configFile=eslint.config.mjs
-  cp "$templates/eslint/vanilla.config.mjs" eslint.config.mjs
+  cp "$templates/eslint/js.config.mjs" eslint.config.mjs
 
 }
 
@@ -34,8 +33,7 @@ setupJest() {
   npm i --save-dev @jest/globals 1> /dev/null
   npm i --save-dev @types/jest 1> /dev/null
 
-  configFile=jest.config.js
-  cp "$templates/jest/vanilla.config.js" jest.config.js
+  cp "$templates/jest/js.config.js" jest.config.js
 
   #sedTarget='  "scripts": {\n    "test": "echo \\"Error: no test specified\\" && exit 1"\n  },'
   sed -i ':a;N;$!ba;s/  "scripts": {\n    "test": "echo \\"Error: no test specified\\" && exit 1"\n  },/  "type": "module",\n  "typeAcquisition": {\n    "include": [\n      "jest"\n    ]\n  },\n  "directories": {\n    "test": "jest"\n  },\n  "scripts": {\n    "test": "node --experimental-vm-modules node_modules\/.bin\/jest"\n  },/g' package.json
