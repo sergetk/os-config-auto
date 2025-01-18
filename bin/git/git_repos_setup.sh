@@ -25,6 +25,7 @@ cloneGitRepos() {
   gclone_p kbdx "$HOME/kbdx"
   gclone_p wallpapers "$HOME/.config/wallpapers"
   gclone https://aur.archlinux.org/nordvpn-bin.git "$HOME/nordvpn"
+  gclone https://aur.archlinux.org/emacs-git.git/ "$HOME/emacs-repo"
   # cd nordvpn-bin
   # sudo pacman -U nordvpn-bin-*.*
   # sudo systemctl enable --now nordvpnd

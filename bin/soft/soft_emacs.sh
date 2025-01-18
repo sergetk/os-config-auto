@@ -5,7 +5,10 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 installEmacs() {
   #installing emacs
-  y_install emacs
+  #y_install emacs (pre packaged)
+  cd "$HOME/emacs-repo"
+  yes | makepkg -siC
+  
 
   #append shortcuts and daemon starup command to i3/config
   append_to_i3 "# short-cut to start emacsclient " "bindsym \$mod+Ctrl+Return exec --no-startup-id emacsclient -c"
