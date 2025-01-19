@@ -26,17 +26,6 @@ export SOFT_EMACS_FUNC="installEmacs"
 export SOFT_DEV_FUNC="installDev"
 export UTIL_CLEAN_FUNC="cleanUp"
 
-export oSUpdateTransition="$OS_UPDATE_FUNC $OS_FIXES_STATE"
-export osFixesTransition="$OS_FIXES_FUNC $OS_SSH_STATE"
-export osSshTransition="$OS_SSH_FUNC $GIT_SSH_STATE"
-export gitSshTransition="$GIT_SSH_FUNC $GIT_CONFIG_STATE"
-export gitConfigTransition="$GIT_CONFIG_FUNC $GIT_REPOS_STATE"
-export gitReposTransition="$GIT_REPOS_FUNC $SOFT_MISC_STATE"
-export softMiscTransition="$SOFT_MISC_FUNC $SOFT_EMACS_STATE"
-export emacsTransition="$SOFT_EMACS_FUNC $SOFT_DEV_STATE"
-export devTransition="$SOFT_DEV_FUNC $UTIL_CLEAN_STATE"
-export cleanTransition="$UTIL_CLEAN_FUNC $DONE_STATE"
-
 #salt pass token ssh_pub
 export -A stateFuncParams=()
 stateFuncParams["$OS_UPDATE_FUNC"]=''
@@ -50,15 +39,14 @@ stateFuncParams["$SOFT_EMACS_FUNC"]=''
 stateFuncParams["$SOFT_DEV_FUNC"]=''
 stateFuncParams["$UTIL_CLEAN_FUNC"]=''
 
-
 export -A stateTransitions=()
-stateTransitions["$OS_UPDATE_STATE"]="updateOS $OS_FIXES_STATE"
-stateTransitions["$OS_FIXES_STATE"]="applyOsFixes $OS_SSH_STATE"
-stateTransitions["$OS_SSH_STATE"]="createSshKey $GIT_SSH_STATE"
-stateTransitions["$GIT_SSH_STATE"]="createGitToken $GIT_CONFIG_STATE"
-stateTransitions["$GIT_CONFIG_STATE"]="createGitConfig $GIT_REPOS_STATE"
-stateTransitions["$GIT_REPOS_STATE"]="cloneGitRepos $SOFT_MISC_STATE"
-stateTransitions["$SOFT_MISC_STATE"]="installMisc $SOFT_EMACS_STATE"
-stateTransitions["$SOFT_EMACS_STATE"]="installEmacs $SOFT_DEV_STATE"
-stateTransitions["$SOFT_DEV_STATE"]="installDev $UTIL_CLEAN_STATE"
-stateTransitions["$UTIL_CLEAN_STATE"]="cleanUp $DONE_STATE"
+stateTransitions["$OS_UPDATE_STATE"]="$OS_UPDATE_FUNC $OS_FIXES_STATE"
+stateTransitions["$OS_FIXES_STATE"]="$OS_FIXES_FUNC $OS_SSH_STATE"
+stateTransitions["$OS_SSH_STATE"]="$OS_SSH_FUNC $GIT_SSH_STATE"
+stateTransitions["$GIT_SSH_STATE"]="$GIT_SSH_FUNC $GIT_CONFIG_STATE"
+stateTransitions["$GIT_CONFIG_STATE"]="$GIT_CONFIG_FUNC $GIT_REPOS_STATE"
+stateTransitions["$GIT_REPOS_STATE"]="$GIT_REPOS_FUNC $SOFT_MISC_STATE"
+stateTransitions["$SOFT_MISC_STATE"]="$SOFT_MISC_FUNC $SOFT_EMACS_STATE"
+stateTransitions["$SOFT_EMACS_STATE"]="$SOFT_EMACS_FUNC $SOFT_DEV_STATE"
+stateTransitions["$SOFT_DEV_STATE"]="$SOFT_DEV_FUNC $UTIL_CLEAN_STATE"
+stateTransitions["$UTIL_CLEAN_STATE"]="$UTIL_CLEAN_FUNC $DONE_STATE"

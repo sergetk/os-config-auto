@@ -18,6 +18,7 @@ testStates() {
   assertEquals "SOFT_DEV" "$SOFT_DEV_STATE"
   assertEquals "SOFT_MISC" "$SOFT_MISC_STATE"
   assertEquals "DONE" "$DONE_STATE"
+  assertEquals "UTIL_CLEAN" "$UTIL_CLEAN_STATE"
 }
 
 testStateFunctions(){
@@ -33,31 +34,18 @@ testStateFunctions(){
   assertEquals "cleanUp" "$UTIL_CLEAN_FUNC" 
 }
 
-testStateTransitions() {
-  assertEquals "updateOS $OS_FIXES_STATE" "$oSUpdateTransition"
-  assertEquals "applyOsFixes $OS_SSH_STATE" "$osFixesTransition"
-  assertEquals "createSshKey $GIT_SSH_STATE" "$osSshTransition"
-  assertEquals "createGitToken $GIT_CONFIG_STATE" "$gitSshTransition"
-  assertEquals "createGitConfig $GIT_REPOS_STATE" "$gitConfigTransition"
-  assertEquals "cloneGitRepos $SOFT_MISC_STATE" "$gitReposTransition"
-  assertEquals "installMisc $SOFT_EMACS_STATE" "$softMiscTransition"
-  assertEquals "installEmacs $SOFT_DEV_STATE" "$emacsTransition"
-  assertEquals "installDev $UTIL_CLEAN_STATE" "$devTransition"
-  assertEquals "cleanUp $DONE_STATE" "$cleanTransition"
-}
-
 testStatesTransitionsMap(){
   assertEquals 10 "${#stateTransitions[*]}"
-  assertEquals "$oSUpdateTransition" "${stateTransitions["$OS_UPDATE_STATE"]}"
-  assertEquals "$osFixesTransition" "${stateTransitions["$OS_FIXES_STATE"]}"
-  assertEquals "$osSshTransition" "${stateTransitions["$OS_SSH_STATE"]}"
-  assertEquals "$gitSshTransition" "${stateTransitions["$GIT_SSH_STATE"]}"
-  assertEquals "$gitConfigTransition" "${stateTransitions["$GIT_CONFIG_STATE"]}"
-  assertEquals "$gitReposTransition" "${stateTransitions["$GIT_REPOS_STATE"]}"
-  assertEquals "$softMiscTransition" "${stateTransitions["$SOFT_MISC_STATE"]}"
-  assertEquals "$emacsTransition" "${stateTransitions["$SOFT_EMACS_STATE"]}"
-  assertEquals "$devTransition" "${stateTransitions["$SOFT_DEV_STATE"]}"
-  assertEquals "$cleanTransition" "${stateTransitions["$UTIL_CLEAN_STATE"]}"
+  assertEquals "updateOS OS_FIXES" "${stateTransitions["$OS_UPDATE_STATE"]}"
+  assertEquals "applyOsFixes OS_SSH" "${stateTransitions["$OS_FIXES_STATE"]}"
+  assertEquals "createSshKey GIT_SSH" "${stateTransitions["$OS_SSH_STATE"]}"
+  assertEquals "createGitToken GIT_CONFIG" "${stateTransitions["$GIT_SSH_STATE"]}"
+  assertEquals "createGitConfig GIT_REPOS" "${stateTransitions["$GIT_CONFIG_STATE"]}"
+  assertEquals "cloneGitRepos SOFT_MISC" "${stateTransitions["$GIT_REPOS_STATE"]}"
+  assertEquals "installMisc SOFT_EMACS" "${stateTransitions["$SOFT_MISC_STATE"]}"
+  assertEquals "installEmacs SOFT_DEV" "${stateTransitions["$SOFT_EMACS_STATE"]}"
+  assertEquals "installDev UTIL_CLEAN" "${stateTransitions["$SOFT_DEV_STATE"]}"
+  assertEquals "cleanUp DONE" "${stateTransitions["$UTIL_CLEAN_STATE"]}"
 }
 
 testStatesFuncParams() {

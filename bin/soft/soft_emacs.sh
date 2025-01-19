@@ -10,7 +10,7 @@ installEmacs() {
   y_install libgccjit
   y_install libotf
   y_install tree-sitter
-  sudo_cmd "yes | makepkg -C"
+  yes | makepkg -C
   y_install_local "emacs-git-*-x86_64.pkg.tar.xz"
 
   #append shortcuts and daemon starup command to i3/config
