@@ -7,7 +7,7 @@ installEmacs() {
   #installing emacs
   #y_install emacs (pre packaged)
   cd "$HOME/emacs-repo"
-  yes | makepkg -siC
+  sudo_cmd "yes | makepkg -siC"
   
 
   #append shortcuts and daemon starup command to i3/config

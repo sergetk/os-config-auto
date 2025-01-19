@@ -39,7 +39,13 @@ processState() {
     read -ra transitionFuncParams <<< "$transitionFuncParamsStr"
   }
 
-  echo "${transitionFunc} ${transitionFuncParams[@]}"
+  echo "--- ${transitionFunc} ${transitionFuncParams[@]}"
+  "${transitionFunc}" "${transitionFuncParams[@]}"
+  [ "$?" == 1 ] && {
+    printf "Command %s failed\n" "${stateTransition[0]}"
+    return 1
+  }
+
   printf "%s" "${stateTransition[1]}" > "$stateLoc"
 }
 
