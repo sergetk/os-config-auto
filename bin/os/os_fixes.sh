@@ -12,6 +12,8 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 . "${absPath}/bin/utils/util_functions.sh"
 
 applyOsFixes() {
+  [ -e "/var/lib/pacman/db.lck" ] && rm "/var/lib/pacman/db.lck"
+  
   # fixes sound on fresh manjaro installation
   y_install pulseaudio-alsa
 
