@@ -7,8 +7,11 @@ installEmacs() {
   #installing emacs
   #y_install emacs (pre packaged)
   cd "$HOME/emacs-repo"
-  sudo_cmd "yes | makepkg -siC"
-  
+  y_install libgccjit
+  y_install libotf
+  y_install tree-sitter
+  sudo_cmd "yes | makepkg -C"
+  y_install_local "emacs-git-*-x86_64.pkg.tar.xz"
 
   #append shortcuts and daemon starup command to i3/config
   append_to_i3 "# short-cut to start emacsclient " "bindsym \$mod+Ctrl+Return exec --no-startup-id emacsclient -c"

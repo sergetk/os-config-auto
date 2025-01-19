@@ -22,6 +22,14 @@ y_install() #@ USAGE: aconfinst $2 -sudo password file (default pass.txt); $1 - 
   sudo_cmd "yes | pacman -S $1" "${2:-$passLoc}"
 }
 
+## function which installs software package with root previledges from local source
+## and automatically yes from prompt with yes | no options  
+y_install_local() #@ USAGE: aconfinst $2 -sudo password file (default pass.txt); $1 - package name;
+{
+  sudo_cmd "yes | pacman -U $1" "${2:-$passLoc}"
+}
+
+
 append_to() #@ $1 - command/text, $2 - target, $3 - test mode (optional)
 {
   # printf is hard to overwrite from tests,use test flag ($3) instead, default 1 (false)

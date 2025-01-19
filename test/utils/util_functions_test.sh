@@ -56,6 +56,20 @@ testYesInstall(){
   assertEquals 0 "$exitCode"
 }
 
+testYesInstallLocal() {
+  testInputCmdLocal='yes | pacman -U node'
+  
+  sudo_cmd(){
+    printf "%s\n" "$*"
+    return 0
+  } 
+
+  msg=$(y_install_local "$testInputCmdLocal" "$testPass")
+  exitCode=$?
+  assertContains "$msg" "$testInputCmdLocal $testPass" 
+  assertEquals 0 "$exitCode"
+}
+
 testAppendTo() {
   msg=$(append_to "$testInputCmd" "$testPass" 0)
   exitCode=$?
