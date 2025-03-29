@@ -5,12 +5,13 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 # shellcheck source="../utils/util_functions.sh"
 . "${absPath}"/bin/utils/util_functions.sh
 
-installDev(){
+installDev() {
   # shellcheck source=/dev/null
   . "$HOME/.nvm/nvm.sh"
 
   npm install -g bash-language-server
   y_install shellcheck
+  npm install -g prettier
 
   #zsh as main shell as it requires confirmation
   sudo_cmd "yes | chsh -s $(which zsh) $USER"
