@@ -66,4 +66,6 @@ installMisc() {
   sudo_cmd "groupadd nordvpn"
   sudo_cmd "usermod -aG nordvpn $USER"
   sudo_cmd "systemctl enable --now nordvpnd"
+  #shellcheck disable=SC2164
+  cd "$HOME/os-config-auto"
 }
