@@ -62,7 +62,7 @@ installMisc() {
   #shellcheck disable=SC2164
   cd "$HOME/nordvpn"
   makepkg -fs
-  sudo_cmd "pacman -U nordvpn-bin-*"
+  y_install_local "nordvpn-bin-*"
   sudo_cmd "groupadd nordvpn"
   sudo_cmd "usermod -aG nordvpn $USER"
   sudo_cmd "systemctl enable --now nordvpnd"
