@@ -24,7 +24,7 @@ installMisc() {
   append_to_i3 "# load wallpaper script " "exec_always --no-startup-id sh ~/.config/wallpaper.sh"
   mv "$HOME/.config/nitrogen" "$HOME/.config/nitro"
 
-  y_install keepass
+  y_install keepassxc
   y_install unrar
 
   sed -i 's/bottom/top/g' ~/.i3/config
