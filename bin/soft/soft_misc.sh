@@ -59,6 +59,9 @@ installMisc() {
   #shellcheck disable=SC2016
   append_to 'export PATH="$PATH:/usr/lib/dart/bin"' "$HOME/.profile"
 
+  #vlc plugins
+  y_install vlc-plugins-all
+
   #shellcheck disable=SC2164
   cd "$HOME/nordvpn"
   makepkg -fs
