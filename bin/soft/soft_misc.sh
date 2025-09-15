@@ -64,6 +64,7 @@ installMisc() {
 
   #shellcheck disable=SC2164
   cd "$HOME/nordvpn"
+  y_install libxml2-legacy
   makepkg -fs
   y_install_local "nordvpn-bin-*"
   # sudo_cmd "groupadd nordvpn"

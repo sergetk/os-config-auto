@@ -6,9 +6,8 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 
 templates="$absPath/scripts/templates"
 
-createProjectJson() #@ USAGE: create package.json
-{
-  yes $'\n' | npm init 1> /dev/null
+createProjectJson() { #@ USAGE: create package.json
+  yes $'\n' | npm init 1>/dev/null
 }
 
 setupEslint() {
@@ -16,9 +15,9 @@ setupEslint() {
   [ -e "package.json" ] || return 1
 
   #install libs
-  npm i --save-dev eslint 1> /dev/null
-  npm i --save-dev @eslint/js 1> /dev/null
-  npm i --save-dev globals 1> /dev/null
+  npm i --save-dev eslint 1>/dev/null
+  npm i --save-dev @eslint/js 1>/dev/null
+  npm i --save-dev globals 1>/dev/null
 
   #create config file
   cp "$templates/eslint/js.config.mjs" eslint.config.mjs
@@ -28,10 +27,10 @@ setupEslint() {
 setupJest() {
   # exit if package.json doesn't exist
   [ -e "package.json" ] || return 1
-  
-  npm i --save-dev jest 1> /dev/null
-  npm i --save-dev @jest/globals 1> /dev/null
-  npm i --save-dev @types/jest 1> /dev/null
+
+  npm i --save-dev jest 1>/dev/null
+  npm i --save-dev @jest/globals 1>/dev/null
+  npm i --save-dev @types/jest 1>/dev/null
 
   cp "$templates/jest/js.config.js" jest.config.js
 
