@@ -9,16 +9,25 @@
 absPath="${PWD%%os-config-auto*}os-config-auto"
 passLoc="${absPath}/pass.txt"
 
-#@ USAGE: sudocmd $2 -sudo password file (default pass.txt); $1 - command to run;
+#@ USAGE: sudocmd $2 -sudo password file (default pass.txt); $1 - command to run
 sudo_cmd() {
   pass="${2:-$passLoc}"
   (cat "$pass") | sudo -S sh -c "$1"
 }
 
 ## function remove db.lck if exists
-remove_dblock() {
-  [ -e "/var/lib/pacman/db.lck" ] && {
-    sudo_cmd "rm /var/lib/pacman/db.lck"
+##@ USAGE: $1 (test only) - file path
+delete_dblock() {
+  default_db_path="/var/lib/pacman/db.lck"
+  path="${1:-$default_db_path}"
+  delete_file "$path"
+}
+
+## function remove file if exists
+##@ USAGE: $1 - file path
+delete_file() {
+  [ -e "$1" ] && {
+    sudo_cmd "rm $1"
   }
 }
 
@@ -26,7 +35,7 @@ remove_dblock() {
 ## and automatically yes from prompt with yes | no options
 ##@ USAGE: aconfinst $2 -sudo password file (default pass.txt); $1 - package name;
 y_install() {
-  remove_dblock
+  delete_dblock
   sudo_cmd "yes | pacman -S $1" "${2:-$passLoc}"
 }
 
@@ -34,7 +43,7 @@ y_install() {
 ## and automatically yes from prompt with yes | no options
 #@ USAGE: aconfinst $2 -sudo password file (default pass.txt); $1 - package name;
 y_install_local() {
-  remove_dblock
+  delete_dblock
   sudo_cmd "yes | pacman -U $1" "${2:-$passLoc}"
 }
 

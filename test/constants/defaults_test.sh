@@ -14,6 +14,7 @@ testDefaults() {
   assertEquals "${absPath}/pass.txt" "$DEFAULT_PASS_LOCATION"
   assertEquals "${absPath}/token.txt" "$DEFAULT_TOKEN_LOCATION"
   assertEquals "${absPath}/state.txt" "$DEFAULT_STATE_LOCATION"
+  assertEquals "/var/lib/pacman/db.lck" "$DEFAULT_DBLOCK_LOCATION"
 }
 
 . "${absPath}/lib/shunit2/shunit2"

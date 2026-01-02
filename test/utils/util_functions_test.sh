@@ -2,78 +2,94 @@
 
 absPath="${PWD%%os-config-auto*}os-config-auto"
 . "${absPath}/bin/utils/util_functions.sh"
+. "${absPath}/test/stubs/util_stubs.sh"
 
 testPass="${absPath}/test/stubs/pass.txt"
-testInputCmd='pacman -s node'
+testInputCmd='pacman -S node'
 gitPersonal="git@github.com:sergetk/"
+dummyDbLckPath="${absPath}/test/stubs/dummyDb.lck"
 
-setUp () {
-
-  git() {
-    # shellcheck disable=SC2317
-    printf "%s\n" "$*"    
-    # shellcheck disable=SC2317
-    return 0
-  } 
+setUp() {
+  stubGit
 }
 
-# generic test function 
-# $1 command and its parameters
-# $2 expected output from the command
+# generic test function
+# $1 command
+# $2 parameters
+# $3 expected output from the command
 # $4 exit code
-validateValues() {
-  read -ra cmd <<< "$1"
-  expectedMsg=$2
-  expectedExitCode=$3
+# validateValues() {
+#   cmd="$1"
+#   args="$2"
+#   expectedMsg=$3
+#   expectedExitCode=$4
 
-  msg=$("${cmd[*]}") 
-  exitCode=$?
-  assertEquals "$expectedMsg" "$msg"
-  assertEquals "$expectedExitCode" "$exitCode"
-}
+#   msg=$("$cmd" "$args")
+#   exitCode=$?
+#   assertEquals "$expectedMsg" "$msg"
+#   assertEquals "$expectedExitCode" "$exitCode"
+# }
 
+# this test must be first as later tests create stab for sudo_cmd
 testSudoCmd() {
-  sudo() {
-    printf "sudo %s\n" "$*"
-    return 0
-  }
+  stubCat
+  stubSudo
 
   msg=$(sudo_cmd "$testInputCmd" "$testPass")
   exitCode=$?
-  assertContains "$msg" "-S sh -c $testInputCmd" 
+  assertContains "$msg" "-S sh -c $testInputCmd"
+  assertEquals 0 "$exitCode"
+
+}
+
+testDeleteFile() {
+  stubSudoCMD
+  # validateValues "delete_file" "$dummyDbLckPath" "rm $dummyDbLckPath" 0
+  msg=$(delete_file "$dummyDbLckPath")
+  exitCode=$?
+  assertContains "$msg" "rm $dummyDbLckPath"
   assertEquals 0 "$exitCode"
 }
 
-testYesInstall(){
-  sudo_cmd(){
-    printf "%s\n" "$*"
-    return 0
-  } 
+testDeleteDbLock() {
+  stubSudoCMD
+  #validateValues "delete_dblock" "$dummyDbLckPath" "rm $dummyDbLckPath" 0
 
+  msg=$(delete_dblock "$dummyDbLckPath")
+  exitCode=$?
+  assertContains "$msg" "rm $dummyDbLckPath"
+  assertEquals 0 "$exitCode"
+
+}
+
+testYesInstall() {
+  stubSudoCMD
   msg=$(y_install "$testInputCmd" "$testPass")
   exitCode=$?
-  assertContains "$msg" "$testInputCmd $testPass" 
+  assertContains "$msg" "$testInputCmd $testPass"
   assertEquals 0 "$exitCode"
+  #validateValues "y_install" "emacs $testPass" "yes | pacman -S emacs $testPass" 0
 }
 
 testYesInstallLocal() {
   testInputCmdLocal='yes | pacman -U node'
-  
-  sudo_cmd(){
+
+  # shellcheck disable=SC2329
+  sudo_cmd() {
     printf "%s\n" "$*"
     return 0
-  } 
+  }
 
   msg=$(y_install_local "$testInputCmdLocal" "$testPass")
   exitCode=$?
-  assertContains "$msg" "$testInputCmdLocal $testPass" 
+  assertContains "$msg" "$testInputCmdLocal $testPass"
   assertEquals 0 "$exitCode"
 }
 
 testAppendTo() {
   msg=$(append_to "$testInputCmd" "$testPass" 0)
   exitCode=$?
-  assertContains "$msg" "$testInputCmd $testPass" 
+  assertContains "$msg" "$testInputCmd $testPass"
   assertEquals 0 "$exitCode"
 }
 
@@ -82,16 +98,16 @@ testAppendToI3() {
   exitCode=$?
 
   i3_target="$HOME/.i3/config"
-  assertContains "$msg"  "Hello $i3_target"
-  assertContains "$msg"  "world $i3_target"
+  assertContains "$msg" "Hello $i3_target"
+  assertContains "$msg" "world $i3_target"
   assertNotContains "$msg" "Hello world"
   assertEquals 0 "$exitCode"
 }
 
-testWriteTo(){
+testWriteTo() {
   msg=$(write_to "$testInputCmd" "$testPass" 0)
   exitCode=$?
-  assertContains "$msg" "$testInputCmd $testPass" 
+  assertContains "$msg" "$testInputCmd $testPass"
   assertEquals 0 "$exitCode"
 }
 
@@ -145,7 +161,7 @@ testCreateDir() {
   assertEquals "Directory created at $currentDir" "$msg"
   assertEquals 0 "$exitCode"
 
-  rm -r  "./foo"
+  rm -r "./foo"
 }
 
 testCreateDirErrorInvalidPath() {
@@ -156,25 +172,25 @@ testCreateDirErrorInvalidPath() {
   assertEquals 1 "$exitCode"
 }
 
-testPathExists(){
+testPathExists() {
   mkdir foo
   pathExists "foo"
   assertTrue 'invalid directory' $?
 
   touch baz.txt
   pathExists "$PWD/baz.txt"
-  assertTrue "path doesnt exists" $? 
+  assertTrue "path doesnt exists" $?
   rm -rf foo
   rm -rf baz.txt
 }
 
-testContainsText(){
+testContainsText() {
   file="$PWD/test.txt"
   touch $file
   append_to "foo bar" "$file"
-  
+
   containsText 'foo bar' "$file"
-  assertTrue  $?
+  assertTrue $?
 
   containsText 'foo' ""
   assertFalse $?
@@ -206,4 +222,3 @@ oneTimeTearDown() {
 
 # shellcheck source="../../lib/shunit2/shunit2"
 . "${absPath}/lib/shunit2/shunit2"
-

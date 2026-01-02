@@ -5,7 +5,6 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 # shellcheck source=../../bin/constants/errors.sh
 . "${absPath}/bin/constants/errors.sh"
 
-
 testErrorsMessages() {
   assertEquals "$ERR_INVALID_PARAM_NUM" "Invalid number of parameters!"
   assertEquals "$ERR_SALT_MISSING" "Salt token file is missing!"
@@ -16,8 +15,8 @@ testErrorsMessages() {
   assertEquals "$ERR_INVALID_GIT_CONFIG_LOCATION" "Invalid git configuration location!"
   assertEquals "$ERR_EMAIL" "Invalid email!"
   assertEquals "$ERR_STATE_FILE_MISSING" "State file doesn't exist!"
-  assertEquals "$ERR_INVALID_STATE_TRANSITION" "Invalid State transition!" 
+  assertEquals "$ERR_INVALID_STATE_TRANSITION" "Invalid State transition!"
+  assertEquals "$ERR_FAILED_STATE" "Failed to process state!"
 }
 
 . "${absPath}/lib/shunit2/shunit2"
-

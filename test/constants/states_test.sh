@@ -19,22 +19,23 @@ testStates() {
   assertEquals "SOFT_MISC" "$SOFT_MISC_STATE"
   assertEquals "DONE" "$DONE_STATE"
   assertEquals "UTIL_CLEAN" "$UTIL_CLEAN_STATE"
+  assertEquals "ERROR" "$ERROR_STATE"
 }
 
-testStateFunctions(){
-  assertEquals "updateOS" "$OS_UPDATE_FUNC" 
-  assertEquals "applyOsFixes" "$OS_FIXES_FUNC" 
-  assertEquals "createSshKey" "$OS_SSH_FUNC" 
-  assertEquals "createGitToken" "$GIT_SSH_FUNC" 
-  assertEquals "createGitConfig" "$GIT_CONFIG_FUNC" 
-  assertEquals "cloneGitRepos" "$GIT_REPOS_FUNC" 
-  assertEquals "installMisc" "$SOFT_MISC_FUNC" 
-  assertEquals "installEmacs" "$SOFT_EMACS_FUNC" 
-  assertEquals "installDev" "$SOFT_DEV_FUNC" 
-  assertEquals "cleanUp" "$UTIL_CLEAN_FUNC" 
+testStateFunctions() {
+  assertEquals "updateOS" "$OS_UPDATE_FUNC"
+  assertEquals "applyOsFixes" "$OS_FIXES_FUNC"
+  assertEquals "createSshKey" "$OS_SSH_FUNC"
+  assertEquals "createGitToken" "$GIT_SSH_FUNC"
+  assertEquals "createGitConfig" "$GIT_CONFIG_FUNC"
+  assertEquals "cloneGitRepos" "$GIT_REPOS_FUNC"
+  assertEquals "installMisc" "$SOFT_MISC_FUNC"
+  assertEquals "installEmacs" "$SOFT_EMACS_FUNC"
+  assertEquals "installDev" "$SOFT_DEV_FUNC"
+  assertEquals "cleanUp" "$UTIL_CLEAN_FUNC"
 }
 
-testStatesTransitionsMap(){
+testStatesTransitionsMap() {
   assertEquals 10 "${#stateTransitions[*]}"
   assertEquals "updateOS OS_FIXES" "${stateTransitions["$OS_UPDATE_STATE"]}"
   assertEquals "applyOsFixes OS_SSH" "${stateTransitions["$OS_FIXES_STATE"]}"
@@ -49,7 +50,7 @@ testStatesTransitionsMap(){
 }
 
 testStatesFuncParams() {
-  assertEquals 10 "${#stateFuncParams[*]}" 
+  assertEquals 10 "${#stateFuncParams[*]}"
   assertEquals "" "${stateFuncParams[${OS_UPDATE_FUNC}]}"
   assertEquals "" "${stateFuncParams[${OS_FIXES_FUNC}]}"
   assertEquals "$DEFAULT_SSH_LOCATION" "${stateFuncParams[${OS_SSH_FUNC}]}"

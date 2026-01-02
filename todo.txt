@@ -5,3 +5,13 @@ Remaining
 3) create interactive menu so I can select which parts of the script should be ran.
 4) update README.md
 
+Bugs
+1) If state fails it doesn't terminate app which it should probably do, since in some cases if all actions in the
+   script fail then state enters infinite loop
+
+
+Daily
+1) move replace with sed into command which takes regex and path of file on which to run replace 
+2) create Error_state which will terminate the script
+3) make sure app running with logging into log file as default
+

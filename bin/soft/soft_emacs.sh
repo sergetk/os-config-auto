@@ -12,6 +12,7 @@ installEmacs() {
   y_install tree-sitter
   #use mirror emacs repo as savannah is too slow
   sed -i 's/git\.savannah\.gnu\.org\/git/github\.com\/emacs-mirror/' "$HOME/emacs-repo/.SRCINFO"
+  sed -i 's/git\.savannah\.gnu\.org\/git/github\.com\/emacs-mirror/' "$HOME/emacs-repo/PKGBUILD"
   yes | makepkg -C
   y_install_local "emacs-git-*-x86_64.pkg.tar.xz"
 

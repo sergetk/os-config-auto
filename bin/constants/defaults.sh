@@ -2,6 +2,7 @@
 
 absPath="${PWD%%os-config-auto*}os-config-auto"
 
+export DEFAULT_DBLOCK_LOCATION="/var/lib/pacman/db.lck"
 export DEFAULT_EMAIL_LOCATION="${absPath}/email.txt"
 export DEFAULT_SSH_DIR="$HOME/.ssh"
 export DEFAULT_HOSTS_SSH_LOCATION="${DEFAULT_SSH_DIR}/known_hosts"

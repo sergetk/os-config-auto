@@ -3,15 +3,17 @@
 absPath="${PWD%%os-config-auto*}os-config-auto"
 . "${absPath}/bin/utils/util_clean_up.sh"
 
-testCleanUp(){
+testCleanUp() {
   function rm() {
-    printf "%s\n" "$*" 
+    printf "%s\n" "$*"
     return 0
   }
-  
+
   msg=$(cleanUp)
   exitCode=$?
-  assertEquals "$msg" "${absPath}/install_ohmyzsh.sh"
+  assertContains "failed clean up ohmyzsh" "$msg" "${absPath}/install_ohmyzsh.sh"
+  assertContains "failed clean up pass" "$msg" "${absPath}/pass.txt"
+  assertContains "failed clean up email" "$msg" "${absPath}/email.txt"
   assertEquals 0 "$exitCode"
 }
 
