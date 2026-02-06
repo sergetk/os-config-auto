@@ -31,7 +31,7 @@ delete_file() {
   }
 }
 
-## function which installs software package with root previledges
+## function which installs software package with root privileges
 ## and automatically yes from prompt with yes | no options
 ##@ USAGE: aconfinst $2 -sudo password file (default pass.txt); $1 - package name;
 y_install() {
@@ -39,13 +39,15 @@ y_install() {
   sudo_cmd "yes | pacman -S $1" "${2:-$passLoc}"
 }
 
-## function which installs software package with root previledges from local source
+## function which installs software package with root privileges from local source
 ## and automatically yes from prompt with yes | no options
 #@ USAGE: aconfinst $2 -sudo password file (default pass.txt); $1 - package name;
 y_install_local() {
   delete_dblock
   sudo_cmd "yes | pacman -U $1" "${2:-$passLoc}"
 }
+
+##function which uninstalls software package with root previle
 
 #@ $1 - command/text, $2 - target, $3 - test mode (optional)
 append_to() {
