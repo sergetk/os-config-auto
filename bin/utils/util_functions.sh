@@ -15,6 +15,12 @@ sudo_cmd() {
   (cat "$pass") | sudo -S sh -c "$1"
 }
 
+#@ USAGE: cmd $2 -sudo password file (default pass.txt); $1 - command to run
+cmd_pass() {
+  pass="${2:-$passLoc}"
+  (cat "$pass") | sh -c "$1"
+}
+
 ## function remove db.lck if exists
 ##@ USAGE: $1 (test only) - file path
 delete_dblock() {
@@ -29,6 +35,12 @@ delete_file() {
   [ -e "$1" ] && {
     sudo_cmd "rm $1"
   }
+}
+
+## function install software ackage with root privileges using yay
+##@ USAGE: aconfinst $2 -sudo password file (default pass.txt); $1 - package name;
+y_yay_install() {
+  cmd_pass "yes | yay -S $1" "${2:-$passLoc}"
 }
 
 ## function which installs software package with root privileges
@@ -68,8 +80,11 @@ append_to() {
 append_to_i3() {
   testMode="${3-:1}"
   i3_target="$HOME/.i3/config"
-  append_to "$1" "$i3_target" "$testMode"
-  append_to "$2" "$i3_target" "$testMode"
+
+  if ! grep -q "$1" "$i3_target"; then
+    append_to "$1" "$i3_target" "$testMode"
+    append_to "$2" "$i3_target" "$testMode"
+  fi
 }
 
 #@ $1 - command/text, $2 - target, $3 - test mode (optional)
@@ -105,18 +120,18 @@ isValidPathFormat() { #@ USAGE: isVliadPathFormat $1 - path;
 }
 
 createDir() { #@ USAGE: createDir $1 - path;
-  isValidPathFormat $1
+  isValidPathFormat "$1"
 
   if [ $? -eq 0 ]; then
-    mkdir -p $1
-    if [ -d $1 ]; then
-      printf "Directory created at %s" $1
+    mkdir -p "$1"
+    if [ -d "$1" ]; then
+      printf "Directory created at %s" "$1"
       return 0
     fi
-    printf "error: calling mkdir -p $1"
+    printf "error: calling mkdir -p %s" "$1"
     return 1
   fi
-  printf "invalid path = %s" $1
+  printf "invalid path = %s" "$1"
   return 1
 }
 
@@ -131,8 +146,6 @@ containsText() { #@ USAGE: containsText $1 - text; $2 - path;
   if [ $? -eq 0 ]; then
     grep -q "$1" "$2"
     return $?
-  else
-    return 1
   fi
 
   return 1

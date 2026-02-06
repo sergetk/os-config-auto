@@ -45,6 +45,6 @@ applyOsFixes() {
 
   #install volctl
   sudo_cmd "yes | yay -S volctl"
-  append_to_i3 "# start volctl " "exec_always --no-startup-id volctl"
+  append_to_i3 "# start volctl " "exec --no-startup-id volctl"
 
 }
