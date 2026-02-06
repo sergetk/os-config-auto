@@ -47,7 +47,11 @@ y_install_local() {
   sudo_cmd "yes | pacman -U $1" "${2:-$passLoc}"
 }
 
-##function which uninstalls software package with root previle
+##function which uninstalls software package with root privileges
+y_uninstall() {
+  delete_dblock
+  sudo_cmd "yes | pacman -Rns $1" "${2:-$passLoc}"
+}
 
 #@ $1 - command/text, $2 - target, $3 - test mode (optional)
 append_to() {

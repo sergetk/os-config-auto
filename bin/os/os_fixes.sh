@@ -36,4 +36,15 @@ applyOsFixes() {
   #installing ntp for accurate date
   y_install ntp
   sudo_cmd "timedatectl set-ntp true"
+
+  #uninstall volumeicon
+  y_uninstall volumeicon
+
+  #install yay
+  y_install yay
+
+  #install volctl
+  sudo_cmd "yes | yay -S volctl"
+  append_to_i3 "# start volctl " "exec_always --no-startup-id volctl"
+
 }
