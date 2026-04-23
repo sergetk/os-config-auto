@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 absPath="${PWD%%os-config-auto*}os-config-auto"
-. "${absPath}/bin/utils/util_functions.sh"  
+. "${absPath}/bin/utils/util_functions.sh"
 
 setup_bindings() {
   updateI3Bindings "$1"
@@ -15,7 +15,7 @@ updateI3Bindings() {
   # shellcheck disable=SC2016
   sed -i 's/bindsym $mod+Print/#bindsym $mod+Print/' "$configFile"
   # shellcheck disable=SC2016
-  sed -i 's/bindsym $mod+Shift+Print/bindsym $mod+Shift+p/' "$configFile" 
+  sed -i 's/bindsym $mod+Shift+Print/bindsym $mod+Shift+p/' "$configFile"
 }
 
 installXorg() {
@@ -25,7 +25,7 @@ installXorg() {
 
 rebindKeys() {
   file=~/.Xmodmap
-  xmodmap -pke > "$file"
+  xmodmap -pke >"$file"
   print_key="Print"
   super_key="Super_R"
   printKeyMatch=
@@ -33,13 +33,13 @@ rebindKeys() {
   while IFS= read -r line; do
     if [[ $line == *"$print_key"* ]]; then
       printKeyMatch="$line"
-      break; 
+      break
     fi
-  done < "$file"
+  done <"$file"
 
-  [ -n "$printKeyMatch" ]  || {
+  [ -n "$printKeyMatch" ] || {
     printf "%s\n" "No $print_key found!"
-    exit 1;
+    exit 1
   }
 
   printf "%s\n" "$printKeyMatch"

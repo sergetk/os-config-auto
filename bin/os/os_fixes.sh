@@ -47,4 +47,7 @@ applyOsFixes() {
   sudo_cmd "yes | yay -S volctl"
   append_to_i3 "# start volctl " "exec --no-startup-id volctl"
 
+  #force volume icon
+  append_to_i3 "# start volume icon " "exec --no-startup-id volumeicon"
+
 }
