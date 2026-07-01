@@ -22,7 +22,8 @@ cloneGitRepos() {
 
   gclone_p emacs.d "$HOME/.emacs.d"
   gclone_p notes "$HOME/.notes"
-  gclone_p kbdx "$HOME/kbdx"
+  gclone_p ppw "$HOME/ppw"
+  gclone_p bookmarks "$HOME/bookmarks"
   gclone_p wallpapers "$HOME/.config/wallpapers"
   gclone https://aur.archlinux.org/nordvpn-bin.git "$HOME/nordvpn"
   #gclone https://aur.archlinux.org/emacs-git.git/ "$HOME/emacs-repo"
