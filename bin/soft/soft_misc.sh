@@ -55,10 +55,6 @@ installMisc() {
   nvm use node
   nvm alias default node
 
-  y_install dart
-  #shellcheck disable=SC2016
-  append_to 'export PATH="$PATH:/usr/lib/dart/bin"' "$HOME/.profile"
-
   #vlc plugins
   y_install vlc-plugins-all
 
