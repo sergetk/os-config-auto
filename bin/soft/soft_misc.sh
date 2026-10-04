@@ -11,61 +11,65 @@ absPath="${PWD%%os-config-auto*}os-config-auto"
 . "${absPath}/bin/utils/util_functions.sh"
 
 append_nvm_to_shellrc() { #@ append nvm path to shell rc file: $1 shell rc file path
-  # shellcheck disable=SC2016
-  append_to 'export NVM_DIR="$HOME/.nvm"' "$1"
-  append_to '[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"' "$1"
+    # shellcheck disable=SC2016
+    append_to 'export NVM_DIR="$HOME/.nvm"' "$1"
+    append_to '[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"' "$1"
 }
 
 installMisc() {
 
-  #y_install feh
-  #copy wallpapers.sh to .config directory
-  cp "$HOME/os-config-auto/scripts/wallpaper.sh" "$HOME/.config/"
-  append_to_i3 "# load wallpaper script " "exec_always --no-startup-id sh ~/.config/wallpaper.sh"
-  mv "$HOME/.config/nitrogen" "$HOME/.config/nitro"
+    #y_install feh
+    #copy wallpapers.sh to .config directory
+    cp "$HOME/os-config-auto/scripts/wallpaper.sh" "$HOME/.config/"
+    append_to_i3 "# load wallpaper script " "exec_always --no-startup-id sh ~/.config/wallpaper.sh"
+    mv "$HOME/.config/nitrogen" "$HOME/.config/nitro"
 
-  y_install keepassxc
-  y_install unrar
+    y_install keepassxc
+    y_install unrar
 
-  sed -i 's/bottom/top/g' ~/.i3/config
+    sed -i 's/bottom/top/g' ~/.i3/config
 
-  #installing brave browser
-  sudo_cmd "sed -i 's/^#EnableAUR/EnableAUR/' /etc/pamac.conf"
+    #installing brave browser
+    sudo_cmd "sed -i 's/^#EnableAUR/EnableAUR/' /etc/pamac.conf"
 
-  y_install brave-browser
-  sed -i 's/palemoon/brave/' ~/.i3/config
+    y_install brave-browser
+    sed -i 's/palemoon/brave/' ~/.i3/config
 
-  #installing zsh
-  y_install zsh
+    #import bookmarks from bookmarks repo
+    cp ~/bookmarks/bookmarks.json ~/.config/BraveSoftware/Brave-Browser/Default/Bookmarks.bak
 
-  #installing node version manager
-  y_install nvm
+    
+    #installing zsh
+    y_install zsh
 
-  curl -fsSL -o install_ohmyzsh.sh https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-  sh install_ohmyzsh.sh --unattended
+    #installing node version manager
+    y_install nvm
 
-  append_nvm_to_shellrc "$HOME/.zshrc"
-  append_nvm_to_shellrc "$HOME/.bashrc"
+    curl -fsSL -o install_ohmyzsh.sh https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    sh install_ohmyzsh.sh --unattended
 
-  export NVM_DIR="$HOME/.nvm"
-  # shellcheck source=/dev/null
-  source /usr/share/nvm/init-nvm.sh
+    append_nvm_to_shellrc "$HOME/.zshrc"
+    append_nvm_to_shellrc "$HOME/.bashrc"
 
-  nvm install node
-  nvm use node
-  nvm alias default node
+    export NVM_DIR="$HOME/.nvm"
+    # shellcheck source=/dev/null
+    source /usr/share/nvm/init-nvm.sh
 
-  #vlc plugins
-  y_install vlc-plugins-all
+    nvm install node
+    nvm use node
+    nvm alias default node
 
-  #shellcheck disable=SC2164
-  cd "$HOME/nordvpn"
-  y_install libxml2-legacy
-  makepkg -fs
-  y_install_local "nordvpn-bin-*"
-  # sudo_cmd "groupadd nordvpn"
-  sudo_cmd "usermod -aG nordvpn $USER"
-  sudo_cmd "systemctl enable --now nordvpnd"
-  #shellcheck disable=SC2164
-  cd "$HOME/os-config-auto"
+    #vlc plugins
+    y_install vlc-plugins-all
+
+    #shellcheck disable=SC2164
+    cd "$HOME/nordvpn"
+    y_install libxml2-legacy
+    makepkg -fs
+    y_install_local "nordvpn-bin-*"
+    # sudo_cmd "groupadd nordvpn"
+    sudo_cmd "usermod -aG nordvpn $USER"
+    sudo_cmd "systemctl enable --now nordvpnd"
+    #shellcheck disable=SC2164
+    cd "$HOME/os-config-auto"
 }
