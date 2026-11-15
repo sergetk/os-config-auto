@@ -19,7 +19,6 @@ updateOS() {
   
   sudo_cmd "yes | pacman -Rdd linux-firmware"
   sudo_cmd "yes | pacman -Syu linux-firmware"
-  # sudo_cmd "pacman-mirrors --fasttrack"
   sudo_cmd "pacman-mirrors --country New_Zealand,Australia,United_States --api --protocols https"
   sudo_cmd "timedatectl set-timezone Pacific/Auckland"
   sudo_cmd "timedatectl set-ntp true"
