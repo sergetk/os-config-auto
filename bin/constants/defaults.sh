@@ -12,4 +12,5 @@ export DEFAULT_SALT_LOCATION="${absPath}/gt.enc"
 export DEFAULT_PASS_LOCATION="${absPath}/pass.txt"
 export DEFAULT_TOKEN_LOCATION="${absPath}/token.txt"
 export DEFAULT_STATE_LOCATION="${absPath}/state.txt"
+#git hub official key which verifies that one actually connects to official github server
 export GIT_SSH_HOSTS_ENTRY="github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
