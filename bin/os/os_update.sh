@@ -17,8 +17,8 @@ updateOS() {
   #sudo_cmd "yes | mhwd-kernel -i linux69 rmc"
   #When attempting to upgrade from 20250508.788aadc8-2 or earlier need following two commands
   
-  #sudo_cmd "yes | pacman -Rdd linux-firmware"
-  #sudo_cmd "yes | pacman -Syu linux-firmware"
+  sudo_cmd "yes | pacman -Rdd linux-firmware"
+  sudo_cmd "yes | pacman -Syu linux-firmware"
   # sudo_cmd "pacman-mirrors --fasttrack"
   sudo_cmd "pacman-mirrors --country New_Zealand,Australia,United_States --api --protocols https"
   sudo_cmd "timedatectl set-timezone Pacific/Auckland"
