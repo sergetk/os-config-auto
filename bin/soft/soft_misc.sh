@@ -63,13 +63,12 @@ installMisc() {
     y_install vlc-plugins-all
 
     #shellcheck disable=SC2164
-    cd "$HOME/nordvpn"
-    y_install libxml2-legacy
-    makepkg -fs
-    y_install_local "nordvpn-bin-*"
-    # sudo_cmd "groupadd nordvpn"
-    sudo_cmd "usermod -aG nordvpn $USER"
-    sudo_cmd "systemctl enable --now nordvpnd"
+    # cd "$HOME/nordvpn"
+    # y_install libxml2-legacy
+    # makepkg -fs
+    # y_install_local "nordvpn-bin-*"
+    # sudo_cmd "usermod -aG nordvpn $USER"
+    # sudo_cmd "systemctl enable --now nordvpnd"
     #shellcheck disable=SC2164
-    cd "$HOME/os-config-auto"
+    # cd "$HOME/os-config-auto"   
 }
