@@ -16,7 +16,7 @@ updateOS() {
   #yes | pacman -Syu glibc-locales --overwrite /usr/lib/locale/\*/\*
   #sudo_cmd "yes | mhwd-kernel -i linux69 rmc"
   #When attempting to upgrade from 20250508.788aadc8-2 or earlier need following two commands
-  sudo_cmd "yes | pacman -Rdd linux-firmware"
+  #sudo_cmd "yes | pacman -Rdd linux-firmware"
   sudo_cmd "yes | pacman -Syu linux-firmware"
   sudo_cmd "pacman-mirrors --fasttrack"
   sudo_cmd "timedatectl set-timezone Pacific/Auckland"
